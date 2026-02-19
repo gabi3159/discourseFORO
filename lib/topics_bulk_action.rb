@@ -341,6 +341,18 @@ class TopicsBulkAction
     }
   end
 
+  def remove_tags
+    topics.each do |t|
+      if guardian.can_edit?(t)
+        if DiscourseTagging.tag_topic_by_names(t, guardian, [], bulk_tag_opts)
+          @changed_ids << t.id
+        else
+          t.errors.full_messages.each { |msg| @errors[msg] += 1 }
+        end
+      end
+    end
+  end
+
   def guardian
     @guardian ||= Guardian.new(@user)
   end
