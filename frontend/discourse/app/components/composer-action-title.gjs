@@ -5,6 +5,7 @@ import { computed, set } from "@ember/object";
 import { service } from "@ember/service";
 import { trustHTML } from "@ember/template";
 import { tagName } from "@ember-decorators/component";
+import ComposerActions from "discourse/components/composer-actions";
 import PostLanguageSelector from "discourse/components/post-language-selector";
 import escape from "discourse/lib/escape";
 import { iconHTML } from "discourse/lib/icon-library";
@@ -14,15 +15,11 @@ import {
   CREATE_TOPIC,
   EDIT,
   EDIT_SHARED_DRAFT,
-  PRIVATE_MESSAGE,
   REPLY,
 } from "discourse/models/composer";
-import ComposerActions from "discourse/select-kit/components/composer-actions";
 import { i18n } from "discourse-i18n";
 
 const TITLES = {
-  [PRIVATE_MESSAGE]: "topic.private_message",
-  [CREATE_TOPIC]: "topic.create_long",
   [CREATE_SHARED_DRAFT]: "composer.create_shared_draft",
   [EDIT_SHARED_DRAFT]: "composer.edit_shared_draft",
   [ADD_TRANSLATION]: "composer.translations.title",
@@ -137,6 +134,7 @@ export default class ComposerActionTitle extends Component {
 
   <template>
     <div class="composer-action-title" ...attributes>
+
       <ComposerActions
         @composerModel={{this.model}}
         @replyOptions={{this.model.replyOptions}}
