@@ -18,8 +18,14 @@ Rails.application.config.after_initialize { UpcomingChanges.clear_caches! }
 
 DiscourseEvent.on(:upcoming_change_enabled) do |setting_name|
   # Respond to event here, e.g. if setting_name == :enable_form_templates do X.
+  if setting_name == :change_trust_level_3_cap_requirements
+    SiteSetting::Action::ChangeTrustLevel3CapRequirementsToggled.call(enabled: true)
+  end
 end
 
 DiscourseEvent.on(:upcoming_change_disabled) do |setting_name|
   # Respond to event here, e.g. if setting_name == :enable_form_templates do X.
+  if setting_name == :change_trust_level_3_cap_requirements
+    SiteSetting::Action::ChangeTrustLevel3CapRequirementsToggled.call(enabled: false)
+  end
 end

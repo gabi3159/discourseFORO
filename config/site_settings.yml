@@ -4320,3 +4320,11 @@ experimental:
   experimental_topic_category_change_notification:
     default: false
     hidden: true
+  change_trust_level_3_cap_requirements:
+    default: false
+    hidden: true
+    client: true
+    upcoming_change:
+      status: "stable"
+      impact: "other,all_members"
+      learn_more_url: "https://meta.discourse.org/t/-/397098"
