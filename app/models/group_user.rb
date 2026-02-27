@@ -17,6 +17,7 @@ class GroupUser < ActiveRecord::Base
 
   after_commit :increase_group_user_count, on: [:create]
   after_commit :decrease_group_user_count, on: [:destroy]
+  after_commit :cleanup_inaccessible_notifications, on: [:destroy]
 
   def self.notification_levels
     NotificationLevels.all
@@ -213,6 +214,12 @@ class GroupUser < ActiveRecord::Base
     SQL
   end
   private_class_method :semantically_higher_notification_level_sql
+
+  def cleanup_inaccessible_notifications
+    return if destroyed_by_association&.active_record == User
+
+    Jobs.enqueue(:delete_inaccessible_notifications, user_id: user_id, group_id: group_id)
+  end
 end
 
 # == Schema Information
