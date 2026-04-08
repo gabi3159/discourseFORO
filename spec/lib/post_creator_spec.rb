@@ -1222,7 +1222,7 @@ RSpec.describe PostCreator do
         expect(topic.posts.where(post_type: Post.types[:small_action]).count).to eq(i)
       end
 
-      expect(topic.word_count).to eq(0)
+      expect(topic.word_count).to be_nil
 
       p2 = Fabricate(:post, topic: topic)
       Topic.reset_highest(topic.id)
@@ -1257,6 +1257,77 @@ RSpec.describe PostCreator do
 
       expect(topic.highest_post_number).to eq(1)
       expect(topic.highest_staff_post_number).to eq(2)
+    end
+
+    it "does not bump stats for small_action posts without content" do
+      post = create_post(raw: "hello world topic")
+      topic = post.topic
+      topic.reload
+
+      expect(topic.highest_post_number).to eq(1)
+      expect(topic.highest_staff_post_number).to eq(1)
+      expect(topic.posts_count).to eq(1)
+
+      last_posted_at_before = topic.last_posted_at
+      last_post_user_id_before = topic.last_post_user_id
+      bumped_at_before = topic.bumped_at
+
+      freeze_time 1.hour.from_now
+
+      PostCreator.create!(
+        Discourse.system_user,
+        topic_id: topic.id,
+        post_type: Post.types[:small_action],
+        action_code: "closed.enabled",
+        skip_validations: true,
+      )
+      topic.reload
+
+      expect(topic.highest_post_number).to eq(1)
+      expect(topic.highest_staff_post_number).to eq(2)
+      expect(topic.posts_count).to eq(1)
+      expect(topic.reply_count).to eq(0)
+      expect(topic.last_posted_at).to eq_time(last_posted_at_before)
+      expect(topic.last_post_user_id).to eq(last_post_user_id_before)
+      expect(topic.bumped_at).to eq_time(bumped_at_before)
+
+      topic.update_columns(
+        highest_staff_post_number: 0,
+        highest_post_number: 0,
+        posts_count: 0,
+        word_count: 0,
+        last_posted_at: 1.year.ago,
+      )
+
+      Topic.reset_highest(topic.id)
+      topic.reload
+
+      expect(topic.highest_post_number).to eq(1)
+      expect(topic.highest_staff_post_number).to eq(2)
+      expect(topic.posts_count).to eq(1)
+      expect(topic.last_posted_at).to eq_time(last_posted_at_before)
+    end
+
+    it "bumps topic for small_action posts with content" do
+      post = create_post(raw: "hello world topic")
+      topic = post.topic
+      topic.reload
+
+      bumped_at_before = topic.bumped_at
+
+      freeze_time 1.hour.from_now
+
+      PostCreator.create!(
+        Discourse.system_user,
+        raw: "This topic is being closed because the issue has been resolved.",
+        topic_id: topic.id,
+        post_type: Post.types[:small_action],
+        action_code: "closed.enabled",
+        skip_validations: true,
+      )
+      topic.reload
+
+      expect(topic.bumped_at).to be > bumped_at_before
     end
   end
 

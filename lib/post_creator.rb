@@ -293,8 +293,7 @@ class PostCreator
 
     post.word_count = post.raw.scan(/[[:word:]]+/).size
 
-    increase_posts_count =
-      !post.topic&.private_message? || post.post_type != Post.types[:small_action]
+    increase_posts_count = post.post_type != Post.types[:small_action]
     post.post_number ||=
       Topic.next_post_number(
         post.topic_id,
@@ -516,11 +515,15 @@ class PostCreator
     attrs = { updated_at: Time.now }
 
     if @post.post_type != Post.types[:whisper] && !@opts[:silent]
-      attrs[:last_posted_at] = @post.created_at
-      attrs[:last_post_user_id] = @post.user_id
-      attrs[:word_count] = (@topic.word_count || 0) + @post.word_count
-      attrs[:excerpt] = @post.excerpt_for_topic if new_topic?
-      attrs[:bumped_at] = @post.created_at unless @post.no_bump
+      unless @post.post_type == Post.types[:small_action]
+        attrs[:last_posted_at] = @post.created_at
+        attrs[:last_post_user_id] = @post.user_id
+        attrs[:word_count] = (@topic.word_count || 0) + @post.word_count
+        attrs[:excerpt] = @post.excerpt_for_topic if new_topic?
+      end
+      no_bump = @post.no_bump
+      no_bump ||= @post.post_type == Post.types[:small_action] && @post.raw.blank?
+      attrs[:bumped_at] = @post.created_at unless no_bump
     end
 
     @topic.update_columns(attrs)
