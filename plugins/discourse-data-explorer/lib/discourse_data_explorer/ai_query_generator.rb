@@ -44,6 +44,9 @@ module DiscourseDataExplorer
 
           SELECT :num, :name
         - Supported param types: integer, text, boolean, date
+        - IMPORTANT: params are substituted as text literals. For date arithmetic, always cast explicitly:
+          WHERE created_at >= :start_date::date
+          AND created_at < :end_date::date + INTERVAL '1 day'
 
         Discourse schema knowledge:
         - user_actions table stores likes (action_type 1)
