@@ -4,10 +4,10 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { capitalize } from "@ember/string";
 import moment from "moment";
-import DButton from "discourse/components/d-button";
-import icon from "discourse/helpers/d-icon";
 import Badge from "discourse/models/badge";
 import Category from "discourse/models/category";
+import DButton from "discourse/ui-kit/d-button";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
 import I18n, { i18n } from "discourse-i18n";
 import { isNumericColumn, looksLikeDate } from "../lib/chart-helpers";
 import DataExplorerChart from "./data-explorer-chart";
@@ -321,7 +321,7 @@ export default class QueryResult extends Component {
           </div>
           {{#if this.cachedResultNotice}}
             <div class="cached-result-notice">
-              {{icon "clock-rotate-left"}}
+              {{dIcon "clock-rotate-left"}}
               {{this.cachedResultNotice}}
             </div>
           {{/if}}

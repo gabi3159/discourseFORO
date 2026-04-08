@@ -1,7 +1,7 @@
 import AdminConfigAreaEmptyList from "discourse/admin/components/admin-config-area-empty-list";
-import DBreadcrumbsItem from "discourse/components/d-breadcrumbs-item";
-import DPageSubheader from "discourse/components/d-page-subheader";
-import icon from "discourse/helpers/d-icon";
+import DBreadcrumbsItem from "discourse/ui-kit/d-breadcrumbs-item";
+import DPageSubheader from "discourse/ui-kit/d-page-subheader";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 import ChannelDetails from "../../../../components/channel-details";
 import InlineChannelForm from "../../../../components/inline-channel-form";
@@ -17,7 +17,7 @@ const providerTitle = (provider) =>
 
   {{#if @controller.anyErrors}}
     <div class="alert alert-error chat-integration-error-banner">
-      {{icon "triangle-exclamation"}}
+      {{dIcon "triangle-exclamation"}}
       <span class="error-message">
         {{i18n "chat_integration.channels_with_errors"}}
       </span>

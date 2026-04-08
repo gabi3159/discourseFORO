@@ -4,11 +4,8 @@ import { action } from "@ember/object";
 import { getOwner } from "@ember/owner";
 import { service } from "@ember/service";
 import BookmarkMenu from "discourse/components/bookmark-menu";
-import DButton from "discourse/components/d-button";
-import DropdownMenu from "discourse/components/dropdown-menu";
 import BookmarkModal from "discourse/components/modal/bookmark";
 import DMenu from "discourse/float-kit/components/d-menu";
-import concatClass from "discourse/helpers/concat-class";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { BookmarkFormData } from "discourse/lib/bookmark-form-data";
 import TopicBookmarkManager from "discourse/lib/topic-bookmark-manager";
@@ -18,6 +15,9 @@ import {
   NOT_BOOKMARKED,
   WITH_REMINDER_ICON,
 } from "discourse/models/bookmark";
+import DButton from "discourse/ui-kit/d-button";
+import DDropdownMenu from "discourse/ui-kit/d-dropdown-menu";
+import dConcatClass from "discourse/ui-kit/helpers/d-concat-class";
 import { i18n } from "discourse-i18n";
 
 export default class TopicBookmarksMenu extends Component {
@@ -328,11 +328,11 @@ export default class TopicBookmarksMenu extends Component {
         @arrow={{false}}
       >
         <:content>
-          <DropdownMenu as |dropdown|>
+          <DDropdownMenu as |dropdown|>
             {{! Post bookmark jump links }}
             {{#each this.postBookmarks as |bookmark|}}
               <dropdown.item
-                class={{concatClass
+                class={{dConcatClass
                   "bookmark-menu__row --jump"
                   (if bookmark.name "--has-name")
                 }}
@@ -405,7 +405,7 @@ export default class TopicBookmarksMenu extends Component {
               {{#if this.topicBookmark}}
                 <dropdown.divider />
                 <dropdown.item
-                  class={{concatClass
+                  class={{dConcatClass
                     "bookmark-menu__row -edit"
                     (if this.topicBookmark.name "--has-name")
                   }}
@@ -466,7 +466,7 @@ export default class TopicBookmarksMenu extends Component {
                 />
               </dropdown.item>
             {{/if}}
-          </DropdownMenu>
+          </DDropdownMenu>
         </:content>
       </DMenu>
     {{else}}

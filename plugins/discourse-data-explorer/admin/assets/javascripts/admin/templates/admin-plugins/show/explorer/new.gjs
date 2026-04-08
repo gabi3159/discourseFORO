@@ -1,6 +1,6 @@
 import BackButton from "discourse/components/back-button";
 import Form from "discourse/components/form";
-import icon from "discourse/helpers/d-icon";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 
 export default <template>
@@ -53,7 +53,7 @@ export default <template>
       >
         <label class="form-kit__label query-new__ai-label">
           <span>{{i18n "explorer.ai.description_title"}}</span>
-          {{icon "discourse-sparkles"}}
+          {{dIcon "discourse-sparkles"}}
         </label>
         <form.Field
           @name="ai_description"

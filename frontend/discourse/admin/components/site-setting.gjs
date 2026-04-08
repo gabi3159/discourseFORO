@@ -14,11 +14,8 @@ import SettingValidationMessage from "discourse/admin/components/setting-validat
 import Description from "discourse/admin/components/site-settings/description";
 import JobStatus from "discourse/admin/components/site-settings/job-status";
 import SiteSetting from "discourse/admin/models/site-setting";
-import DButton from "discourse/components/d-button";
 import JsonSchemaEditorModal from "discourse/components/modal/json-schema-editor";
 import PluginOutlet from "discourse/components/plugin-outlet";
-import basePath from "discourse/helpers/base-path";
-import icon from "discourse/helpers/d-icon";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { uniqueItemsFromArray } from "discourse/lib/array-tools";
 import { bind } from "discourse/lib/decorators";
@@ -26,6 +23,9 @@ import { deepEqual } from "discourse/lib/object";
 import { sanitize } from "discourse/lib/text";
 import { splitString } from "discourse/lib/utilities";
 import { and } from "discourse/truth-helpers";
+import DButton from "discourse/ui-kit/d-button";
+import dBasePath from "discourse/ui-kit/helpers/d-base-path";
+import dIcon from "discourse/ui-kit/helpers/d-icon";
 import { i18n } from "discourse-i18n";
 
 const CUSTOM_TYPES = [
@@ -156,7 +156,7 @@ export default class SiteSettingComponent extends Component {
   get themeSiteSettingWarningText() {
     return trustHTML(
       i18n("admin.theme_site_settings.site_setting_warning", {
-        basePath,
+        basePath: dBasePath,
         defaultThemeName: sanitize(this.defaultTheme.name),
         defaultThemeId: this.defaultTheme.theme_id,
       })
@@ -180,7 +180,7 @@ export default class SiteSettingComponent extends Component {
     ) {
       return trustHTML(
         i18n("admin.upcoming_changes.default_warning", {
-          basePath,
+          basePath: dBasePath,
           changeNamesFilter:
             this.setting.upcoming_change_default_override_metadata
               .change_setting_name,
@@ -194,7 +194,7 @@ export default class SiteSettingComponent extends Component {
 
     return trustHTML(
       i18n("admin.upcoming_changes.default_warning_short", {
-        basePath,
+        basePath: dBasePath,
         changeNamesFilter:
           this.setting.upcoming_change_default_override_metadata
             .change_setting_name,
@@ -484,7 +484,7 @@ export default class SiteSettingComponent extends Component {
               title={{i18n "admin.settings.history"}}
             >
               <span class="history-icon">
-                {{icon "clock-rotate-left"}}
+                {{dIcon "clock-rotate-left"}}
               </span>
             </LinkTo>
           {{/if}}
@@ -541,7 +541,7 @@ export default class SiteSettingComponent extends Component {
           {{#if this.showThemeSiteSettingWarning}}
             <div class="setting-override-warning setting-theme-warning">
               <p class="setting-theme-warning__text">
-                {{icon "paintbrush"}}
+                {{dIcon "paintbrush"}}
                 {{this.themeSiteSettingWarningText}}
               </p>
             </div>
@@ -551,7 +551,7 @@ export default class SiteSettingComponent extends Component {
               class="setting-override-warning setting-upcoming-change-warning"
             >
               <p class="setting-upcoming-change-warning__text">
-                {{icon "flask"}}
+                {{dIcon "flask"}}
                 {{this.upcomingChangeDefaultWarningText}}
               </p>
             </div>
