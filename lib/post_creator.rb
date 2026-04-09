@@ -521,8 +521,12 @@ class PostCreator
         attrs[:word_count] = (@topic.word_count || 0) + @post.word_count
         attrs[:excerpt] = @post.excerpt_for_topic if new_topic?
       end
-      no_bump = @post.no_bump
-      no_bump ||= @post.post_type == Post.types[:small_action] && @post.raw.blank?
+      no_bump =
+        if @opts.key?(:no_bump)
+          @opts[:no_bump]
+        else
+          @post.post_type == Post.types[:small_action] && @post.raw.blank?
+        end
       attrs[:bumped_at] = @post.created_at unless no_bump
     end
 
