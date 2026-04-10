@@ -36,7 +36,7 @@ class DiscourseSolved::BuildSchemaMarkup
   end
 
   def fetch_accepted_answer(topic:)
-    post = topic.solved&.answer_post
+    post = topic.solved&.answer_posts&.first
     post if post.present? && Guardian.new.can_see_post?(post)
   end
 
