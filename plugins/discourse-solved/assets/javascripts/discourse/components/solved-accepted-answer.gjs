@@ -17,28 +17,24 @@ export default class SolvedAcceptedAnswer extends Component {
 
   @tracked expanded = false;
 
-  get topic() {
-    return this.args.post.topic;
+  get answer() {
+    return this.args.answer;
   }
 
-  get acceptedAnswer() {
-    return this.topic.accepted_answer;
+  get topic() {
+    return this.args.topic;
   }
 
   get quoteId() {
-    return `accepted-answer-${this.topic.id}-${this.acceptedAnswer.post_number}`;
+    return `accepted-answer-${this.topic.id}-${this.answer.post_number}`;
   }
 
   get hasExcerpt() {
-    return !!this.acceptedAnswer.excerpt;
+    return !!this.answer.excerpt;
   }
 
   get content() {
-    if (!this.hasExcerpt) {
-      return "";
-    }
-
-    return trustHTML(this.acceptedAnswer.excerpt);
+    return this.hasExcerpt ? trustHTML(this.answer.excerpt) : "";
   }
 
   get showMarkedBy() {
@@ -46,40 +42,28 @@ export default class SolvedAcceptedAnswer extends Component {
   }
 
   get showSolvedBy() {
-    return !(!this.acceptedAnswer.username || !this.acceptedAnswer.post_number);
+    return !(!this.answer.username || !this.answer.post_number);
   }
 
   get postNumber() {
     return i18n("solved.accepted_answer_post_number", {
-      post_number: this.acceptedAnswer.post_number,
+      post_number: this.answer.post_number,
     });
   }
 
-  get solverUsername() {
-    return this.acceptedAnswer.username;
-  }
-
-  get accepterUsername() {
-    return this.acceptedAnswer.accepter_username;
+  get postPath() {
+    return `${this.topic.url}/${this.answer.post_number}`;
   }
 
   get solverDisplayName() {
-    const username = this.acceptedAnswer.username;
-    const name = this.acceptedAnswer.name;
-
+    const { username, name } = this.answer;
     return this.siteSettings.display_name_on_posts && name ? name : username;
   }
 
   get accepterDisplayName() {
-    const username = this.acceptedAnswer.accepter_username;
-    const name = this.acceptedAnswer.accepter_name;
-
+    const username = this.answer.accepter_username;
+    const name = this.answer.accepter_name;
     return this.siteSettings.display_name_on_posts && name ? name : username;
-  }
-
-  get postPath() {
-    const postNumber = this.acceptedAnswer.post_number;
-    return `${this.topic.url}/${postNumber}`;
   }
 
   @action
@@ -87,99 +71,88 @@ export default class SolvedAcceptedAnswer extends Component {
     this.expanded = !this.expanded;
   }
 
-  @action
-  onClickTitle(event) {
-    if (event.target.closest("a") || event.target.closest(".quote-controls")) {
-      return;
-    }
-    this.toggleExpanded();
-  }
-
   <template>
     {{! template-lint-disable no-unnecessary-concat }}
-    {{#if this.acceptedAnswer}}
-      <aside
-        class={{concatClass
-          "quote accepted-answer d-solved-answer"
-          (if this.hasExcerpt "accepted-answer--has-excerpt")
-          (unless this.content "title-only")
-        }}
-        data-expanded="{{this.expanded}}"
-        data-username={{this.acceptedAnswer.username}}
-        data-post={{this.acceptedAnswer.post_number}}
-        data-topic={{this.topic.id}}
-      >
-        <div class="d-solved-answer__header">
-          <h3 class="d-solved-answer__title">
-            {{icon "far-square-check"}}
-            Solved</h3>
-          <div class="d-solved-answer__controls">
-            {{#if this.content}}
-              <DButton
-                class="btn-flat d-solved-answer__toggle"
-                @action={{this.toggleExpanded}}
-                @ariaControls={{this.quoteId}}
-                @ariaExpanded={{this.expanded}}
-                @ariaLabel={{if this.expanded "post.collapse" "expand"}}
-                @title={{if this.expanded "post.collapse" "expand"}}
-                @icon={{if this.expanded "chevron-up" "chevron-down"}}
-              />
-            {{/if}}
+    <aside
+      class={{concatClass
+        "quote accepted-answer d-solved-answer"
+        (if this.hasExcerpt "accepted-answer--has-excerpt")
+        (unless this.content "title-only")
+      }}
+      data-expanded="{{this.expanded}}"
+      data-username={{this.answer.username}}
+      data-post={{this.answer.post_number}}
+      data-topic={{this.topic.id}}
+    >
+      <div class="d-solved-answer__header">
+        <h3 class="d-solved-answer__title">
+          {{icon "far-square-check"}}
+          Solved
+        </h3>
+        <div class="d-solved-answer__controls">
+          {{#if this.content}}
             <DButton
-              class="btn-flat d-solved-answer__jump"
-              @href={{this.postPath}}
-              @title="post.follow_quote"
-              @ariaLabel="post.follow_quote"
-              @icon="arrow-down"
+              class="btn-flat d-solved-answer__toggle"
+              @action={{this.toggleExpanded}}
+              @ariaControls={{this.quoteId}}
+              @ariaExpanded={{this.expanded}}
+              @ariaLabel={{if this.expanded "post.collapse" "expand"}}
+              @title={{if this.expanded "post.collapse" "expand"}}
+              @icon={{if this.expanded "chevron-up" "chevron-down"}}
             />
-          </div>
+          {{/if}}
+          <DButton
+            class="btn-flat d-solved-answer__jump"
+            @href={{this.postPath}}
+            @title="post.follow_quote"
+            @ariaLabel="post.follow_quote"
+            @icon="arrow-down"
+          />
         </div>
+      </div>
 
-        {{#if this.content}}
-          <blockquote id={{this.quoteId}}>
-            <PostCookedHtml
-              @post={{@post}}
-              @cooked={{this.content}}
-              @decoratorState={{@decoratorState}}
-            />
-          </blockquote>
+      {{#if this.content}}
+        <blockquote id={{this.quoteId}}>
+          <PostCookedHtml
+            @post={{@post}}
+            @cooked={{this.content}}
+            @decoratorState={{@decoratorState}}
+          />
+        </blockquote>
+      {{/if}}
+
+      <div class="d-solved-answer__footer">
+        {{#if this.showSolvedBy}}
+          <UserLink @username={{this.answer.username}}>
+            {{boundAvatarTemplate this.answer.avatar_template "tiny"}}
+          </UserLink>
+          <InterpolatedTranslation
+            @key="solved.accepted_answer_solver_info"
+            as |Placeholder|
+          >
+            <Placeholder @name="user" @class="d-solved-answer__solver">
+              {{this.solverDisplayName}}
+            </Placeholder>
+            <Placeholder @name="post">
+              <a class="d-solved-answer__post-link" href={{this.postPath}}>
+                {{this.postNumber}}
+              </a>
+            </Placeholder>
+          </InterpolatedTranslation>
         {{/if}}
 
-        <div class="d-solved-answer__footer">
-          {{#if this.showSolvedBy}}
-            <UserLink @username={{this.solverUsername}}>
-              {{boundAvatarTemplate this.acceptedAnswer.avatar_template "tiny"}}
-            </UserLink>
-            <InterpolatedTranslation
-              @key="solved.accepted_answer_solver_info"
-              as |Placeholder|
-            >
-              <Placeholder @name="user" @class="d-solved-answer__solver">
-                {{this.solverDisplayName}}
-              </Placeholder>
-              <Placeholder @name="post">
-                <a
-                  class="d-solved-answer__post-link"
-                  href={{this.postPath}}
-                >{{this.postNumber}}</a>
-              </Placeholder>
-            </InterpolatedTranslation>
-          {{/if}}
-          {{#if this.showMarkedBy}}
-            <span class="dot-separator"></span>
-
-            <InterpolatedTranslation
-              @key="solved.marked_solved_by"
-              as |Placeholder|
-            >
-              <Placeholder @name="user" @class="d-solved-answer__accepter">
-                {{this.accepterDisplayName}}
-              </Placeholder>
-            </InterpolatedTranslation>
-
-          {{/if}}
-        </div>
-      </aside>
-    {{/if}}
+        {{#if this.showMarkedBy}}
+          <span class="dot-separator"></span>
+          <InterpolatedTranslation
+            @key="solved.marked_solved_by"
+            as |Placeholder|
+          >
+            <Placeholder @name="user" @class="d-solved-answer__accepter">
+              {{this.accepterDisplayName}}
+            </Placeholder>
+          </InterpolatedTranslation>
+        {{/if}}
+      </div>
+    </aside>
   </template>
 }
