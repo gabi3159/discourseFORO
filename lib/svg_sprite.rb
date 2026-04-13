@@ -216,6 +216,7 @@ module SvgSprite
         paintbrush
         palette
         paper-plane
+        paragraph
         pause
         pen
         pencil
