@@ -1110,8 +1110,13 @@ class TopicsController < ApplicationController
         raise Discourse::InvalidParameters.new("Expecting topic_ids to contain a list of topic ids")
       end
       topic_ids = params[:topic_ids].map { |t| t.to_i }
+      if topic_ids.size > TopicsBulkAction::MAX_BULK_SELECT_LIMIT
+        raise Discourse::InvalidParameters.new(
+          I18n.t("topics_bulk.bulk_action_limit", limit: TopicsBulkAction::MAX_BULK_SELECT_LIMIT),
+        )
+      end
     elsif params[:filter] == "unread"
-      topic_ids = bulk_unread_topic_ids
+      topic_ids = bulk_unread_topic_ids.first(TopicsBulkAction::MAX_BULK_SELECT_LIMIT)
     else
       raise ActionController::ParameterMissing.new(:topic_ids)
     end

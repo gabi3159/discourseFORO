@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TopicsBulkAction
+  MAX_BULK_SELECT_LIMIT = 100
+
   attr_reader :errors
 
   def initialize(user, topic_ids, operation, options = {})

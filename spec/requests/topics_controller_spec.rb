@@ -4466,6 +4466,12 @@ RSpec.describe TopicsController do
       let!(:operation) { { type: "change_category", category_id: "1", silent: true } }
       let!(:topic_ids) { [1, 2, 3] }
 
+      it "returns an error when topic_ids exceeds the bulk select limit" do
+        topic_ids = (1..TopicsBulkAction::MAX_BULK_SELECT_LIMIT + 1).to_a
+        put "/topics/bulk.json", params: { topic_ids: topic_ids, operation: operation }
+        expect(response.status).to eq(400)
+      end
+
       it "requires a list of topic_ids or filter" do
         put "/topics/bulk.json", params: { operation: operation }
         expect(response.status).to eq(400)
