@@ -128,6 +128,94 @@ RSpec.describe Admin::StaffActionLogsController do
         expect(response.parsed_body["staff_action_logs"].first["details"]).to include(pm.title)
       end
 
+      describe "reviewable_id" do
+        it "is included for post_approved actions" do
+          reviewable = Fabricate(:reviewable_queued_post_topic)
+          reviewable.perform(admin, :approve_post)
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:post_approved],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first["reviewable_id"]).to eq(
+            reviewable.id,
+          )
+        end
+
+        it "is included for post_rejected actions" do
+          reviewable = Fabricate(:reviewable_queued_post_topic)
+          reviewable.perform(admin, :reject_post)
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:post_rejected],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first["reviewable_id"]).to eq(
+            reviewable.id,
+          )
+        end
+
+        it "is included for approve_user actions" do
+          reviewable = ReviewableUser.create_for(user)
+          reviewable.perform(admin, :approve_user)
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:approve_user],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first["reviewable_id"]).to eq(
+            reviewable.id,
+          )
+        end
+
+        it "is included for delete_user actions from reviewable" do
+          target = Fabricate(:user)
+          reviewable = ReviewableUser.create_for(target)
+          reviewable.perform(admin, :delete_user)
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:delete_user],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first["reviewable_id"]).to eq(
+            reviewable.id,
+          )
+        end
+
+        it "is included for delete_post actions from reviewable" do
+          topic = Fabricate(:topic)
+          Fabricate(:post, topic: topic)
+          reply = Fabricate(:post, topic: topic)
+          flagger = Fabricate(:user, refresh_auto_groups: true)
+          reviewable = PostActionCreator.off_topic(flagger, reply).reviewable
+          reviewable.perform(admin, :delete_and_agree)
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:delete_post],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first["reviewable_id"]).to eq(
+            reviewable.id,
+          )
+        end
+
+        it "is not included when no reviewable exists" do
+          StaffActionLogger.new(admin).log_site_setting_change("title", "old", "new")
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:change_site_setting],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first).not_to have_key("reviewable_id")
+        end
+      end
+
       context "when staff actions are extended" do
         let(:plugin_extended_action) { :confirmed_ham }
         before { UserHistory.stubs(:staff_actions).returns([plugin_extended_action]) }

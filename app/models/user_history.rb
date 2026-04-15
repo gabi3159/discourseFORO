@@ -10,6 +10,7 @@ class UserHistory < ActiveRecord::Base
   belongs_to :post
   belongs_to :topic
   belongs_to :category
+  belongs_to :reviewable, optional: true
 
   # Each value in the context should be shorter than this
   MAX_CONTEXT_LENGTH = 50_000
@@ -485,6 +486,7 @@ end
 #  post_id        :integer
 #  custom_type    :string
 #  category_id    :integer
+#  reviewable_id  :integer
 #
 # Indexes
 #

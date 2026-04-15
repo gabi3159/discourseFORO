@@ -110,7 +110,10 @@ class UserDestroyer
           else
             deleted_by = @actor
           end
-          StaffActionLogger.new(deleted_by).log_user_deletion(user, opts.slice(:context))
+          StaffActionLogger.new(deleted_by, reviewable: opts[:reviewable]).log_user_deletion(
+            user,
+            opts.slice(:context),
+          )
           if opts.slice(:context).blank?
             Rails.logger.warn("User destroyed without context from: #{caller_locations(14, 1)[0]}")
           end
@@ -120,7 +123,7 @@ class UserDestroyer
     end
 
     # After the user is deleted, remove the reviewable unless request comes from reviewable
-    return result if opts[:from_reviewable]
+    return result if opts[:reviewable]
     reviewable = ReviewableUser.pending.find_by(target: user)
     reviewable.perform(@actor, :delete_user) if reviewable
 
