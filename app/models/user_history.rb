@@ -486,7 +486,7 @@ end
 #  post_id        :integer
 #  custom_type    :string
 #  category_id    :integer
-#  reviewable_id  :integer
+#  reviewable_id  :bigint
 #
 # Indexes
 #
@@ -494,6 +494,7 @@ end
 #  index_user_histories_on_action_and_id                           (action,id)
 #  index_user_histories_on_category_id                             (category_id)
 #  index_user_histories_on_post_id                                 (post_id)
+#  index_user_histories_on_reviewable_id                           (reviewable_id)
 #  index_user_histories_on_subject_and_id                          (subject,id)
 #  index_user_histories_on_target_user_id_and_id                   (target_user_id,id)
 #  index_user_histories_on_topic_id_and_target_user_id_and_action  (topic_id,target_user_id,action)

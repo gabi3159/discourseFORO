@@ -204,6 +204,52 @@ RSpec.describe Admin::StaffActionLogsController do
           )
         end
 
+        it "is included for delete_post actions when deleting a user from a reviewable" do
+          target = Fabricate(:user)
+          topic = Fabricate(:topic, user: target)
+          Fabricate(:post, topic: topic, user: target)
+          Fabricate(:post, topic: topic, user: target)
+          reviewable = ReviewableUser.create_for(target)
+
+          reviewable.perform(admin, :delete_user)
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:delete_post],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first["reviewable_id"]).to eq(
+            reviewable.id,
+          )
+        end
+
+        it "is included for suspend_user actions from reviewable flows" do
+          target = Fabricate(:user)
+          reviewable = Fabricate(:reviewable_flagged_post, target_created_by: target)
+
+          User::Action::SuspendAll.call(
+            users: [target],
+            actor: admin,
+            params:
+              OpenStruct.new(
+                message: "suspending from reviewable",
+                post_id: reviewable.target_id,
+                suspend_until: 1.day.from_now,
+                reason: "spam",
+                reviewable_id: reviewable.id,
+              ),
+          )
+
+          get "/admin/logs/staff_action_logs.json",
+              params: {
+                action_id: UserHistory.actions[:suspend_user],
+              }
+
+          expect(response.parsed_body["staff_action_logs"].first["reviewable_id"]).to eq(
+            reviewable.id,
+          )
+        end
+
         it "is not included when no reviewable exists" do
           StaffActionLogger.new(admin).log_site_setting_change("title", "old", "new")
 

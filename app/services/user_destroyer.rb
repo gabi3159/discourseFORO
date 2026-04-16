@@ -168,6 +168,7 @@ class UserDestroyer
           @actor.staff? ? @actor : Discourse.system_user,
           post,
           context: I18n.t("staff_action_logs.user_associated_posts_deleted"),
+          reviewable: opts[:reviewable],
         ).destroy
       end
 
