@@ -8,6 +8,52 @@ module PageObjects
         PageObjects::Components::SelectKit.new(".tag-chooser")
       end
 
+      def add_tag_selector
+        PageObjects::Components::SelectKit.new(
+          "#{MODAL_SELECTOR} .manage-tags-section--add .tag-chooser",
+        )
+      end
+
+      def remove_tag_selector
+        PageObjects::Components::SelectKit.new(
+          "#{MODAL_SELECTOR} .manage-tags-section--remove .tag-chooser",
+        )
+      end
+
+      def replace_from_selector(index = 0)
+        PageObjects::Components::SelectKit.new(
+          "#{MODAL_SELECTOR} .manage-tags-replace-row:nth-of-type(#{index + 1}) .manage-tags-replace-row__from",
+        )
+      end
+
+      def replace_to_selector(index = 0)
+        PageObjects::Components::SelectKit.new(
+          "#{MODAL_SELECTOR} .manage-tags-replace-row:nth-of-type(#{index + 1}) .manage-tags-replace-row__to",
+        )
+      end
+
+      def toggle_remove_all
+        PageObjects::Components::DToggleSwitch.new(
+          "#{MODAL_SELECTOR} .manage-tags-section__remove-all-toggle",
+        ).toggle
+      end
+
+      def click_add_replacement
+        find("#{MODAL_SELECTOR} .manage-tags-replace-row__add").click
+      end
+
+      def has_remove_all_notice?
+        has_css?("#{MODAL_SELECTOR} .manage-tags-section__warning")
+      end
+
+      def has_no_remove_tag_selector?
+        has_no_css?("#{MODAL_SELECTOR} .manage-tags-section--remove .tag-chooser")
+      end
+
+      def has_disabled_add_replacement?
+        has_css?("#{MODAL_SELECTOR} .manage-tags-replace-row__add[disabled]")
+      end
+
       def category_selector
         PageObjects::Components::SelectKit.new(".category-chooser")
       end

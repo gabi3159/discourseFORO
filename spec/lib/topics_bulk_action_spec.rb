@@ -833,4 +833,195 @@ RSpec.describe TopicsBulkAction do
       end.to not_change { Notification.where(user: topic_watcher).count }
     end
   end
+
+  describe "#manage_tags" do
+    fab!(:first_post) { Fabricate(:post, topic:) }
+    fab!(:tag1, :tag)
+    fab!(:tag2, :tag)
+    fab!(:tag3, :tag)
+
+    before do
+      SiteSetting.tagging_enabled = true
+      SiteSetting.tag_topic_allowed_groups = Group::AUTO_GROUPS[:trust_level_0]
+      topic.tags = [tag1, tag2]
+    end
+
+    it "adds tags" do
+      topic_ids =
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          add_tag_ids: [tag3.id],
+        ).perform!
+
+      expect(topic_ids).to eq([topic.id])
+      expect(topic.reload.tags).to contain_exactly(tag1, tag2, tag3)
+    end
+
+    it "removes specific tags" do
+      topic_ids =
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          remove_tag_ids: [tag1.id],
+        ).perform!
+
+      expect(topic_ids).to eq([topic.id])
+      expect(topic.reload.tags).to contain_exactly(tag2)
+    end
+
+    it "replaces tags on topics having the source tag" do
+      other_topic = Fabricate(:topic, user: user)
+      Fabricate(:post, topic: other_topic)
+      other_topic.tags = [tag2]
+
+      topic_ids =
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id, other_topic.id],
+          type: "manage_tags",
+          replace: [{ from_tag_id: tag1.id, to_tag_id: tag3.id }],
+        ).perform!
+
+      expect(topic_ids).to eq([topic.id])
+      expect(topic.reload.tags).to contain_exactly(tag2, tag3)
+      expect(other_topic.reload.tags).to contain_exactly(tag2)
+    end
+
+    it "applies add/remove/replace in a single revision per topic" do
+      tag4 = Fabricate(:tag)
+
+      expect {
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          add_tag_ids: [tag4.id],
+          remove_tag_ids: [tag2.id],
+          replace: [{ from_tag_id: tag1.id, to_tag_id: tag3.id }],
+        ).perform!
+      }.to change { topic.reload.tags.pluck(:name).sort }.to([tag3.name, tag4.name].sort)
+    end
+
+    it "removes all tags when remove_all_tags is true" do
+      topic_ids =
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          remove_all_tags: true,
+        ).perform!
+
+      expect(topic_ids).to eq([topic.id])
+      expect(topic.reload.tags).to be_empty
+    end
+
+    it "raises on tag id appearing in multiple operations" do
+      expect do
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          add_tag_ids: [tag1.id],
+          remove_tag_ids: [tag1.id],
+        ).perform!
+      end.to raise_error(Discourse::InvalidParameters)
+    end
+
+    it "raises when from_tag_id equals to_tag_id" do
+      expect do
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          replace: [{ from_tag_id: tag1.id, to_tag_id: tag1.id }],
+        ).perform!
+      end.to raise_error(Discourse::InvalidParameters)
+    end
+
+    it "raises when remove_all_tags is combined with add" do
+      expect do
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          remove_all_tags: true,
+          add_tag_ids: [tag1.id],
+        ).perform!
+      end.to raise_error(Discourse::InvalidParameters)
+    end
+
+    it "raises when remove_all_tags is combined with remove" do
+      expect do
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          remove_all_tags: true,
+          remove_tag_ids: [tag1.id],
+        ).perform!
+      end.to raise_error(Discourse::InvalidParameters)
+    end
+
+    it "raises when remove_all_tags is combined with replace" do
+      expect do
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          remove_all_tags: true,
+          replace: [{ from_tag_id: tag1.id, to_tag_id: tag3.id }],
+        ).perform!
+      end.to raise_error(Discourse::InvalidParameters)
+    end
+
+    it "does not send notifications" do
+      topic_watcher = Fabricate(:user)
+      Jobs.run_immediately!
+      TopicUser.change(
+        topic_watcher,
+        topic.id,
+        notification_level: TopicUser.notification_levels[:watching],
+      )
+
+      expect do
+        TopicsBulkAction.new(
+          Fabricate(:admin),
+          [topic.id],
+          type: "manage_tags",
+          add_tag_ids: [tag3.id],
+        ).perform!
+      end.to not_change { Notification.where(user: topic_watcher).count }
+    end
+
+    it "respects guardian.can_edit?" do
+      Guardian.any_instance.expects(:can_edit?).returns(false)
+
+      topic_ids =
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          add_tag_ids: [tag3.id],
+        ).perform!
+
+      expect(topic_ids).to eq([])
+      expect(topic.reload.tags).to contain_exactly(tag1, tag2)
+    end
+
+    it "skips unknown tag ids" do
+      topic_ids =
+        TopicsBulkAction.new(
+          topic.user,
+          [topic.id],
+          type: "manage_tags",
+          add_tag_ids: [999_999],
+        ).perform!
+
+      expect(topic_ids).to eq([])
+      expect(topic.reload.tags).to contain_exactly(tag1, tag2)
+    end
+  end
 end

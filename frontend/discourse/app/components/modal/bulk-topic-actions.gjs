@@ -10,15 +10,14 @@ import { Promise } from "rsvp";
 import ConditionalLoadingSection from "discourse/components/conditional-loading-section";
 import DButton from "discourse/components/d-button";
 import DModal from "discourse/components/d-modal";
+import ManageTags from "discourse/components/modal/bulk-topic-actions/manage-tags";
 import BulkPinOptions from "discourse/components/modal/feature-topic/bulk-pin-options";
 import RadioButton from "discourse/components/radio-button";
-import { categoryBadgeHTML } from "discourse/helpers/category-link";
 import { topicLevels } from "discourse/lib/notification-levels";
 import Category from "discourse/models/category";
 import Topic from "discourse/models/topic";
 import autoFocus from "discourse/modifiers/auto-focus";
 import CategoryChooser from "discourse/select-kit/components/category-chooser";
-import TagChooser from "discourse/select-kit/components/tag-chooser";
 import { i18n } from "discourse-i18n";
 
 const _customActions = {};
@@ -32,7 +31,6 @@ export default class BulkTopicActions extends Component {
 
   @tracked activeComponent = null;
   @tracked activeComponentProps = null;
-  @tracked tags = [];
   @tracked categoryId;
   @tracked loading;
   @tracked errors;
@@ -43,6 +41,7 @@ export default class BulkTopicActions extends Component {
   @tracked skippedTopicCount = 0;
 
   @tracked notificationLevelId = null;
+  @tracked manageTags = null;
 
   constructor() {
     super(...arguments);
@@ -207,20 +206,8 @@ export default class BulkTopicActions extends Component {
       case "pin":
         this.performAndRefresh({ type: "pin", ...opts });
         break;
-      case "append-tags":
-        this.performAndRefresh({
-          type: "append_tags",
-          tag_ids: this.tags?.map((t) => t.id),
-        });
-        break;
-      case "replace-tags":
-        this.performAndRefresh({
-          type: "change_tags",
-          tag_ids: this.tags?.map((t) => t.id),
-        });
-        break;
-      case "remove-tags":
-        this.performAndRefresh({ type: "remove_tags" });
+      case "manage-tags":
+        this.performAndRefresh(this.manageTags.buildOperation());
         break;
       case "delete":
         this.performAndRefresh({ type: "delete" });
@@ -332,11 +319,8 @@ export default class BulkTopicActions extends Component {
     }
   }
 
-  get isTagAction() {
-    return (
-      this.model.action === "append-tags" ||
-      this.model.action === "replace-tags"
-    );
+  get isManageTagsAction() {
+    return this.model.action === "manage-tags";
   }
 
   get isNotificationAction() {
@@ -389,16 +373,6 @@ export default class BulkTopicActions extends Component {
     return Category.findById(this.soleCategoryId);
   }
 
-  get soleCategoryBadgeHTML() {
-    return categoryBadgeHTML(this.soleCategory, {
-      allowUncategorized: true,
-    });
-  }
-
-  get showSoleCategoryTip() {
-    return this.soleCategory && this.isTagAction;
-  }
-
   get confirmButtonLabel() {
     if (this.model.confirmButtonTranslationKey) {
       return i18n(this.model.confirmButtonTranslationKey, {
@@ -413,7 +387,16 @@ export default class BulkTopicActions extends Component {
       return !this.notificationLevelId || this.loading;
     }
 
+    if (this.isManageTagsAction) {
+      return !this.manageTags?.isValid || this.loading;
+    }
+
     return this.loading;
+  }
+
+  @action
+  registerManageTags(component) {
+    this.manageTags = component;
   }
 
   @action
@@ -468,18 +451,6 @@ export default class BulkTopicActions extends Component {
                 }}</p>
             {{/if}}
 
-            {{#if this.showSoleCategoryTip}}
-              <div class="topic-bulk-actions-modal__selection-info">
-                {{trustHTML
-                  (i18n
-                    "topics.bulk.selected_sole_category"
-                    count=@model.bulkSelectHelper.selected.length
-                  )
-                }}
-                {{trustHTML this.soleCategoryBadgeHTML}}
-              </div>
-            {{/if}}
-
             {{#if this.isCategoryAction}}
               <p>
                 <CategoryChooser
@@ -511,11 +482,11 @@ export default class BulkTopicActions extends Component {
               </div>
             {{/if}}
 
-            {{#if this.isTagAction}}
-              <p><TagChooser
-                  @tags={{this.tags}}
-                  @categoryId={{this.soleCategoryId}}
-                /></p>
+            {{#if this.isManageTagsAction}}
+              <ManageTags
+                @categoryId={{this.soleCategoryId}}
+                @onRegister={{this.registerManageTags}}
+              />
             {{/if}}
 
             {{#if this.activeComponent}}

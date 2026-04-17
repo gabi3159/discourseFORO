@@ -141,36 +141,36 @@ describe "Topic bulk select" do
     end
   end
 
-  context "when appending tags" do
+  context "when managing tags" do
     fab!(:tag1, :tag)
     fab!(:tag2, :tag)
     fab!(:tag3, :tag)
 
     before { SiteSetting.tagging_enabled = true }
 
-    def open_append_modal(topics_to_select = nil)
+    def open_manage_modal(topics_to_select = nil)
       sign_in(admin)
       visit("/latest")
 
-      open_bulk_actions_modal(topics_to_select, "append-tags")
+      open_bulk_actions_modal(topics_to_select, "manage-tags")
     end
 
     context "when in mobile", mobile: true do
       it "is working" do
         # behavior is already tested on desktop, we simply ensure
         # the general workflow is working on mobile
-        open_append_modal
+        open_manage_modal
       end
     end
 
-    it "appends tags to selected topics" do
-      open_append_modal
+    it "adds tags to selected topics" do
+      open_manage_modal
 
-      topic_bulk_actions_modal.tag_selector.expand
-      topic_bulk_actions_modal.tag_selector.search(tag1.name)
-      topic_bulk_actions_modal.tag_selector.select_row_by_name(tag1.name)
-      topic_bulk_actions_modal.tag_selector.search(tag2.name)
-      topic_bulk_actions_modal.tag_selector.select_row_by_name(tag2.name)
+      topic_bulk_actions_modal.add_tag_selector.expand
+      topic_bulk_actions_modal.add_tag_selector.search(tag1.name)
+      topic_bulk_actions_modal.add_tag_selector.select_row_by_name(tag1.name)
+      topic_bulk_actions_modal.add_tag_selector.search(tag2.name)
+      topic_bulk_actions_modal.add_tag_selector.select_row_by_name(tag2.name)
 
       topic_bulk_actions_modal.click_bulk_topics_confirm
 
@@ -182,32 +182,94 @@ describe "Topic bulk select" do
       ).to have_content(tag2.name)
     end
 
-    context "when selecting topics in different categories" do
-      before do
-        topics
-          .last(2)
-          .each do |topic|
-            topic.update!(category: Fabricate(:category))
-            topic.update!(category: Fabricate(:category))
-          end
-      end
+    it "removes specific tags from selected topics" do
+      topics.last.tags = [tag1, tag2]
+      topics.last.save!
 
-      it "does not show an additional note about the category in the modal" do
-        open_append_modal(topics.last(2))
+      open_manage_modal
 
-        expect(topic_bulk_actions_modal).to have_no_category_badge(topics.last.reload.category)
-      end
+      topic_bulk_actions_modal.remove_tag_selector.expand
+      topic_bulk_actions_modal.remove_tag_selector.search(tag1.name)
+      topic_bulk_actions_modal.remove_tag_selector.select_row_by_name(tag1.name)
+
+      topic_bulk_actions_modal.click_bulk_topics_confirm
+      expect(topic_bulk_actions_modal).to be_closed
+
+      expect(topics.last.reload.tags.map(&:name)).to contain_exactly(tag2.name)
+    end
+
+    it "removes all tags when the toggle is enabled" do
+      topics.last.tags = [tag1, tag2, tag3]
+      topics.last.save!
+
+      open_manage_modal
+      topic_bulk_actions_modal.toggle_remove_all
+
+      expect(topic_bulk_actions_modal).to have_remove_all_notice
+      expect(topic_bulk_actions_modal).to have_no_remove_tag_selector
+      expect(topic_bulk_actions_modal).to have_disabled_add_replacement
+
+      topic_bulk_actions_modal.click_bulk_topics_confirm
+      expect(topic_bulk_actions_modal).to be_closed
+
+      expect(topics.last.reload.tags).to be_empty
+    end
+
+    it "replaces one tag with another" do
+      topics.last.tags = [tag1, tag3]
+      topics.last.save!
+
+      open_manage_modal
+
+      topic_bulk_actions_modal.replace_from_selector.expand
+      topic_bulk_actions_modal.replace_from_selector.search(tag1.name)
+      topic_bulk_actions_modal.replace_from_selector.select_row_by_name(tag1.name)
+
+      topic_bulk_actions_modal.replace_to_selector.expand
+      topic_bulk_actions_modal.replace_to_selector.search(tag2.name)
+      topic_bulk_actions_modal.replace_to_selector.select_row_by_name(tag2.name)
+
+      topic_bulk_actions_modal.click_bulk_topics_confirm
+      expect(topic_bulk_actions_modal).to be_closed
+
+      expect(topics.last.reload.tags.map(&:name)).to contain_exactly(tag2.name, tag3.name)
+    end
+
+    it "supports composite add, remove, and replace in a single submission" do
+      topics.last.tags = [tag1, tag2]
+      topics.last.save!
+      tag4 = Fabricate(:tag)
+      tag5 = Fabricate(:tag)
+
+      open_manage_modal
+
+      topic_bulk_actions_modal.add_tag_selector.expand
+      topic_bulk_actions_modal.add_tag_selector.search(tag4.name)
+      topic_bulk_actions_modal.add_tag_selector.select_row_by_name(tag4.name)
+      topic_bulk_actions_modal.add_tag_selector.collapse
+
+      topic_bulk_actions_modal.remove_tag_selector.expand
+      topic_bulk_actions_modal.remove_tag_selector.search(tag2.name)
+      topic_bulk_actions_modal.remove_tag_selector.select_row_by_name(tag2.name)
+      topic_bulk_actions_modal.remove_tag_selector.collapse
+
+      topic_bulk_actions_modal.replace_from_selector.expand
+      topic_bulk_actions_modal.replace_from_selector.search(tag1.name)
+      topic_bulk_actions_modal.replace_from_selector.select_row_by_name(tag1.name)
+      topic_bulk_actions_modal.replace_to_selector.expand
+      topic_bulk_actions_modal.replace_to_selector.search(tag5.name)
+      topic_bulk_actions_modal.replace_to_selector.select_row_by_name(tag5.name)
+
+      topic_bulk_actions_modal.click_bulk_topics_confirm
+      expect(topic_bulk_actions_modal).to be_closed
+
+      expect(topics.last.reload.tags.map(&:name)).to contain_exactly(tag4.name, tag5.name)
     end
 
     context "when selecting topics that are all in the same category" do
       fab!(:category)
 
       before { topics.last.update!(category_id: category.id) }
-
-      it "shows an additional note about the category in the modal" do
-        open_append_modal
-        expect(topic_bulk_actions_modal).to have_category_badge(category)
-      end
 
       it "allows for searching restricted tags for that category and other tags too if the category allows it" do
         restricted_tag_group = Fabricate(:tag_group)
@@ -216,13 +278,13 @@ describe "Topic bulk select" do
         CategoryTagGroup.create!(category: category, tag_group: restricted_tag_group)
         category.update!(allow_global_tags: true)
 
-        open_append_modal
+        open_manage_modal
 
-        topic_bulk_actions_modal.tag_selector.expand
-        topic_bulk_actions_modal.tag_selector.search(restricted_tag.name)
-        topic_bulk_actions_modal.tag_selector.select_row_by_name(restricted_tag.name)
-        topic_bulk_actions_modal.tag_selector.search(tag1.name)
-        topic_bulk_actions_modal.tag_selector.select_row_by_name(tag1.name)
+        topic_bulk_actions_modal.add_tag_selector.expand
+        topic_bulk_actions_modal.add_tag_selector.search(restricted_tag.name)
+        topic_bulk_actions_modal.add_tag_selector.select_row_by_name(restricted_tag.name)
+        topic_bulk_actions_modal.add_tag_selector.search(tag1.name)
+        topic_bulk_actions_modal.add_tag_selector.select_row_by_name(tag1.name)
 
         topic_bulk_actions_modal.click_bulk_topics_confirm
 

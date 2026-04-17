@@ -141,23 +141,9 @@ export default class BulkSelectTopicsDropdown extends Component {
           !topics.some((t) => t.isPrivateMessage),
       },
       {
-        id: "append-tags",
+        id: "manage-tags",
         icon: "tag",
-        name: i18n("topic_bulk_actions.append_tags.name"),
-        visible: ({ currentUser, siteSettings }) =>
-          siteSettings.tagging_enabled && currentUser.canManageTopic,
-      },
-      {
-        id: "replace-tags",
-        icon: "tag",
-        name: i18n("topic_bulk_actions.replace_tags.name"),
-        visible: ({ currentUser, siteSettings }) =>
-          siteSettings.tagging_enabled && currentUser.canManageTopic,
-      },
-      {
-        id: "remove-tags",
-        icon: "tag",
-        name: i18n("topic_bulk_actions.remove_tags.name"),
+        name: i18n("topic_bulk_actions.manage_tags.name"),
         visible: ({ currentUser, siteSettings }) =>
           siteSettings.tagging_enabled && currentUser.canManageTopic,
       },
@@ -307,22 +293,9 @@ export default class BulkSelectTopicsDropdown extends Component {
           confirmButtonTranslationKey: "topics.bulk.confirm_relist_topics",
         });
         break;
-      case "append-tags":
-        this.showBulkTopicActionsModal(actionId, "append_tags", {
-          description: i18n(`topic_bulk_actions.append_tags.description`),
-          confirmButtonTranslationKey: "topics.bulk.confirm_update_topics",
-        });
-        break;
-      case "replace-tags":
-        this.showBulkTopicActionsModal(actionId, "change_tags", {
-          description: i18n(`topic_bulk_actions.replace_tags.description`),
-          confirmButtonTranslationKey: "topics.bulk.confirm_update_topics",
-        });
-        break;
-      case "remove-tags":
-        this.showBulkTopicActionsModal(actionId, "remove_tags", {
-          description: i18n(`topic_bulk_actions.remove_tags.description`),
-          confirmButtonTranslationKey: "topics.bulk.confirm_update_topics",
+      case "manage-tags":
+        this.showBulkTopicActionsModal(actionId, "manage_tags", {
+          confirmButtonTranslationKey: "topics.bulk.confirm_apply_to_topics",
         });
         break;
       case "delete-topics":
