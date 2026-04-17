@@ -4,6 +4,7 @@ import { hash } from "@ember/helper";
 import { computed, set } from "@ember/object";
 import { trustHTML } from "@ember/template";
 import { tagName } from "@ember-decorators/component";
+import ComposerActions from "discourse/components/composer-actions";
 import escape from "discourse/lib/escape";
 import { iconHTML } from "discourse/lib/icon-library";
 import {
@@ -15,7 +16,6 @@ import {
   PRIVATE_MESSAGE,
   REPLY,
 } from "discourse/models/composer";
-import ComposerActions from "discourse/select-kit/components/composer-actions";
 import { i18n } from "discourse-i18n";
 
 const TITLES = {
@@ -122,17 +122,14 @@ export default class ComposerActionTitle extends Component {
 
   <template>
     <div class="composer-action-title" ...attributes>
+
       <ComposerActions
         @composerModel={{this.model}}
         @replyOptions={{this.model.replyOptions}}
-        @canWhisper={{this.canWhisper}}
-        @canUnlistTopic={{this.canUnlistTopic}}
         @action={{this.model.action}}
         @tabindex={{this.tabindex}}
         @topic={{this.model.topic}}
         @post={{this.model.post}}
-        @whisper={{this.model.whisper}}
-        @noBump={{this.model.noBump}}
         @options={{hash mobilePlacementStrategy="fixed"}}
       />
 
