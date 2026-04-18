@@ -142,6 +142,16 @@ module PageObjects
         expanded_component.has_no_css?(".select-kit-row.is-selected")
       end
 
+      def has_disabled_row_name?(name)
+        expanded_component.has_css?(".select-kit-row.disabled[data-name='#{name}']")
+      end
+
+      def has_disabled_row_reason?(name)
+        expanded_component.has_css?(
+          ".select-kit-row.disabled[data-name='#{name}'] .disabled-reason",
+        )
+      end
+
       def option_names
         expanded_component.all(".select-kit-row").map { |row| row["data-name"] }
       end

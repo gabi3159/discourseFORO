@@ -6,5 +6,8 @@ import SelectKitRowComponent from "discourse/select-kit/components/select-kit/se
 export default class TagChooserRow extends SelectKitRowComponent {
   <template>
     {{discourseTag this.rowName count=this.item.count noHref=true}}
+    {{#if this.rowDisabled}}
+      <span class="disabled-reason">{{this.title}}</span>
+    {{/if}}
   </template>
 }
