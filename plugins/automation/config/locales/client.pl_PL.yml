@@ -322,6 +322,12 @@ pl_PL:
             tags:
               label: Tagi
               description: Lista tagów do dodania do tematu.
+            closed_automatically:
+              label: Automatycznie zamknięte tematy
+              description: Dodawaj tagi do automatycznie zamykanych tematów.
+            closed_manually:
+              label: Ręcznie zamknięte tematy
+              description: Dodawaj tagi do ręcznie zamkniętych tematów.
         post:
           fields:
             creator:

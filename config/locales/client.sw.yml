@@ -1302,6 +1302,7 @@ sw:
       upload_description: "Ingiza maelezo kuhusu upakiaji hapa"
       list_item: "Listi kitu"
       wrap_modal:
+        attribute_value: "Thamani"
         apply: "Tumia"
       help: "Msaada kwenye kuhariri MarkDown"
       modal_ok: "Sawa"
@@ -1521,6 +1522,17 @@ sw:
         name: "Badilisha Lebo"
       delete_topics:
         name: "Futa"
+    nested_replies:
+      sort:
+        label: "Panga kwa"
+        top: "Juu"
+        new: "Mpya"
+      collapsed_replies:
+        one: "%{count} jibu"
+        other: "%{count} majibu"
+      collapse: "Kunja"
+      no_replies: "Bado hakuna majibu."
+      pinned_reply: "Imebandikwa"
     topic:
       filter_to:
         one: "%{count} chapisho kwenye mada"
@@ -1809,8 +1821,6 @@ sw:
           actions: "Vitendo"
           edit: "Hariri"
           delete: "Futa"
-        post_language_selector:
-          none: "Hakuna"
       errors:
         create: "Samahani, hitilafu imetokea wakati wa kutengeneza chapisho lako. Tafadhali jaribu tena."
         edit: "Samahani, hitilafu imetokea wakati wa kuhariri chapisho lako. Tafadhali jaribu tena."

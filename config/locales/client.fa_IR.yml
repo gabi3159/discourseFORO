@@ -2605,6 +2605,8 @@ fa_IR:
       upload_description: "توضیح بارگذاری را در اینجا بنویسید"
       list_item: "فهرست موارد"
       wrap_modal:
+        attribute_key: "کلید"
+        attribute_value: "مقدار"
         apply: "اعمال کردن"
       help: "راهنمای ویرایش با Markdown"
       exit_fullscreen_prompt: "برای خروج از تمام صفحه، دکمه <kbd>ESC</kbd> را فشار دهید"
@@ -2662,6 +2664,9 @@ fa_IR:
       delete_image_button: حذف تصویر
       toggle_image_grid: تغییر وضعیت شبکه تصویر
       link_toolbar:
+        copy: "رونوشت پیوند"
+        link_copied: "لینک کپی شد!"
+      onebox_toolbar:
         copy: "رونوشت پیوند"
         link_copied: "لینک کپی شد!"
     notifications:
@@ -3078,6 +3083,21 @@ fa_IR:
         name: "علامت گذاری به عنوان خوانده نشده"
       update_notifications:
         name: "به روز رسانی اعلان‌ها"
+    nested_replies:
+      sort:
+        label: "مرتب‌سازی بر اساس"
+        top: "برترین‌ها"
+        new: "جدید"
+      load_more_children:
+        one: "%{count} پاسخ دیگر"
+        other: "%{count} پاسخ دیگر"
+      collapsed_replies:
+        one: "%{count} پاسخ"
+        other: "%{count} پاسخ"
+      collapse: "جمع کردن"
+      no_replies: "بدون پاسخ"
+      deleted_post_placeholder: "[حذف شده]"
+      pinned_reply: "سنجاق شده"
     topic:
       filter_to:
         one: "%{count} نوشته در این موضوع وجود دارد"
@@ -3592,7 +3612,7 @@ fa_IR:
         add: "افزودن ترجمه جدید"
         success: "ترجمه‌ها با موفقیت به‌روزرسانی شدند."
         post_language_selector:
-          none: "هیچ کدام"
+          none: "تنظیم نشده"
       errors:
         create: "متأسفیم، در ایجاد نوشته‌ی شما خطایی روی داد. لطفاً دوباره تلاش کنید."
         edit: "متأسفیم، در ویرایش نوشته‌ی شما خطایی روی داد. لطفاً دوباره تلاش کنید."
@@ -3654,8 +3674,8 @@ fa_IR:
           just_the_post: "نه، تنها این نوشته"
         admin: "عملیات مدیریت نوشته"
         admin_action: "مدیر کل"
-        permanently_delete: "برای همیشه حذف کنید"
-        permanently_delete_confirmation: "آیا مطمئنید که می خواهید این پست را برای همیشه حذف کنید؟ شما قادر به بازیابی آن نخواهید بود."
+        permanently_delete: "حذف دائمی"
+        permanently_delete_confirm_phrase: "حذف دائمی"
         wiki: "ساخت دانشنامه"
         unwiki: "حذف دانشنامه"
         convert_to_moderator: "اضافه کردن رنگ همکاران"
@@ -3795,6 +3815,7 @@ fa_IR:
       back: "بازگشت به دسته‌بندی"
       general: "عمومی"
       settings: "تنظیمات"
+      moderation: "نظارت"
       advanced: "پیشرفته"
       topic_template: "قالب"
       tags: "برچسب‌ها"

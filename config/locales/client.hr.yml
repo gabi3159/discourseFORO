@@ -2936,6 +2936,8 @@ hr:
       list_item: "Predmet popisa"
       toggle_direction: "Uključi/isključi smjer"
       wrap_modal:
+        attribute_key: "Ključ"
+        attribute_value: "Vrijednost"
         apply: "Primijeni"
       help: "Markdown pomoć pri izmjenama"
       collapse: "Smanji površinu uređivača"
@@ -3012,6 +3014,9 @@ hr:
         copy: "Kopiraj poveznicu"
         remove: "Uklonite poveznicu"
         visit: "Otvorite poveznicu u vanjskoj kartici"
+        link_copied: "Poveznica kopirana!"
+      onebox_toolbar:
+        copy: "Kopirajte poveznicu"
         link_copied: "Poveznica kopirana!"
     notifications:
       tooltip:
@@ -3476,6 +3481,23 @@ hr:
         name: "Označi kao nepročitano"
       update_notifications:
         name: "Ažurirajte obavijesti"
+    nested_replies:
+      sort:
+        label: "Sortiraj po"
+        top: "Najaktivnije"
+        new: "Novo"
+      load_more_children:
+        one: "još %{count} odgovor"
+        few: "još %{count} odgovora"
+        other: "još %{count} odgovora"
+      collapsed_replies:
+        one: "%{count} odgovor"
+        few: "%{count} odgovora"
+        other: "%{count} odgovora"
+      collapse: "Sakrij"
+      no_replies: "Još nema odgovora."
+      deleted_post_placeholder: "[izbrisao]"
+      pinned_reply: "Zakvačeno"
     topic:
       filter_to:
         one: "%{count} objava u temi"
@@ -4037,7 +4059,7 @@ hr:
           confirm_delete: "Jeste li sigurni da želite izbrisati prijevode za '%{languageCode}'?"
         success: "Prijevodi su uspješno ažurirani"
         post_language_selector:
-          none: "Ništa"
+          none: "Nije postavljeno"
         edit_warning:
           action_original: "Uredite originalnu objavu"
           action_translation: "Uredite ovaj prijevod"
@@ -4105,8 +4127,8 @@ hr:
           just_the_post: "Ne, samo ovu objavu"
         admin: "Objavi administratorske radnje"
         admin_action: "Administrator"
-        permanently_delete: "Trajno izbriši"
-        permanently_delete_confirmation: "Jeste li sigurni da trajno želite izbrisati ovu objavu? Nećete je moći vratiti."
+        permanently_delete: "Trajno brisanje"
+        permanently_delete_confirm_phrase: "trajno brisanje"
         wiki: "Pretvori u Wiki"
         unwiki: "Ukloni Wiki"
         convert_to_moderator: "Dodaj boje osoblja"
@@ -4259,6 +4281,7 @@ hr:
       back: "Natrag u kategoriju"
       general: "Općenito"
       settings: "Postavke"
+      moderation: "Moderiranje"
       advanced: "Napredno"
       topic_template: "Predložak"
       tags: "Oznake"
@@ -5496,7 +5519,6 @@ hr:
           header_description: "Ovdje navedite informacije o ovoj stranici i svom timu kako bi ljudi mogli saznati o čemu se radi u vašoj zajednici, tko stoji iza nje i kako vas kontaktirati u slučaju problema. Prikazano na stranici <a href='%{basePath}/about'>O nama</a>vaše stranice."
         developer:
           title: "Programer"
-          header_description: "Postavke programera za kontrolu ograničenja brzine, množitelja i proračuna, sigurnog načina rada i drugih naprednih značajki"
         experimental:
           title: "Eksperimentalno"
           header_description: "Uključite ili isključite eksperimentalne značajke za svoju web stranicu, većinu njih možete kontrolirati na grupnoj osnovi"

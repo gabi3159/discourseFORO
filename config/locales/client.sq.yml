@@ -2524,6 +2524,7 @@ sq:
       upload_description: "shkruaj përshkrimin e skedarit të ngarkuar këtu"
       list_item: "Element liste"
       wrap_modal:
+        attribute_value: "Vlera"
         apply: "Apliko"
       help: "Ndihmë mbi Markdown"
       exit_fullscreen_prompt: "Shtypni <kbd>ESC</kbd> për të dalë nga ekrani i plotë"
@@ -2579,6 +2580,9 @@ sq:
       delete_image_button: Fshini imazhin
       toggle_image_grid: Ndryshoni rrjetin e imazhit
       link_toolbar:
+        copy: "Kopjoni lidhjen"
+        link_copied: "Lidhja u kopjua!"
+      onebox_toolbar:
         copy: "Kopjoni lidhjen"
         link_copied: "Lidhja u kopjua!"
     notifications:
@@ -2994,6 +2998,20 @@ sq:
         name: "Shënoni të palexuar"
       update_notifications:
         name: "Përditëso Njoftimet"
+    nested_replies:
+      sort:
+        label: "Rendit sipas"
+        top: "Popullore"
+        new: "I Ri"
+      load_more_children:
+        one: "edhe %{count} përgjigje "
+        other: "janë %{count} përgjigje"
+      collapsed_replies:
+        one: "%{count} përgjigje"
+        other: "%{count} përgjigje"
+      collapse: "Zvogëloni"
+      no_replies: "Nuk ka ende përgjigje."
+      pinned_reply: "E përzgjedhur"
     topic:
       filter_to:
         one: "%{count} postim në temë"
@@ -3369,7 +3387,7 @@ sq:
           edit: "Redaktoni"
           delete: "Fshij"
         post_language_selector:
-          none: "Asnjë"
+          none: "Nuk është vendosur"
       errors:
         create: "Na vjen keq, por ndodhi një gabim gjatë hapjes së temës. Provojeni përsëri."
         edit: "Na vjen keq, ndodhi një gabim gjatë redaktimit të temës. Provojeni përsëri."

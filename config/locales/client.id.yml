@@ -1795,6 +1795,16 @@ id:
         name: "Hapus"
       defer:
         name: "Tandai Belum Dibaca"
+    nested_replies:
+      sort:
+        new: "Baru"
+      load_more_children:
+        other: "%{count} jawaban lainnya"
+      collapsed_replies:
+        other: "%{count} balasan"
+      collapse: "Persempit"
+      no_replies: "Belum ada balasan"
+      deleted_post_placeholder: "[dihapus]"
     topic:
       create: "Topik Baru"
       archive_message:
@@ -1910,8 +1920,6 @@ id:
           actions: "Aksi"
           edit: "Ubah"
           delete: "Hapus"
-        post_language_selector:
-          none: "Tidak ada"
       errors:
         upload: "Maaf, terjadi kesalahan saat mengunggah %{file_name}. Silakan coba lagi."
         backup_too_large: "Maaf, file cadangan terlalu besar."

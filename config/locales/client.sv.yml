@@ -2286,6 +2286,8 @@ sv:
       upload_description: "skriv en bildbeskrivning här"
       list_item: "Listobjekt"
       wrap_modal:
+        attribute_key: "Key"
+        attribute_value: "Värde"
         apply: "Tillämpa"
       help: "Markdown-redigeringshjälp"
       exit_fullscreen_prompt: "Tryck på <kbd>ESC</kbd> för att lämna helskärmsläget"
@@ -2339,6 +2341,8 @@ sv:
       delete_image_button: Radera bild
       toggle_image_grid: Växla bildrutnät
       link_toolbar:
+        link_copied: "Länken kopierad!"
+      onebox_toolbar:
         link_copied: "Länken kopierad!"
     notifications:
       tooltip:
@@ -2728,6 +2732,21 @@ sv:
         name: "Radera"
       update_category:
         name: "Uppdatera kategori"
+    nested_replies:
+      sort:
+        label: "Sortera efter"
+        top: "Topp"
+        new: "Nya"
+      load_more_children:
+        one: "Ytterligare %{count} svar"
+        other: "Ytterligare %{count} svar"
+      collapsed_replies:
+        one: "%{count} svar"
+        other: "%{count} svar"
+      collapse: "Förminska"
+      no_replies: "Inga svar ännu."
+      deleted_post_placeholder: "[raderade]"
+      pinned_reply: "Fäst"
     topic:
       filter_to:
         one: "%{count} inlägg i ämnet"
@@ -3223,7 +3242,7 @@ sv:
           edit: "Redigera"
           delete: "Ta bort"
         post_language_selector:
-          none: "Ingen"
+          none: "Inte inställd"
       errors:
         create: "Tyvärr uppstod det ett fel under skapandet av ditt inlägg. Vi ber dig försöka igen."
         edit: "Tyvärr uppstod det ett fel under ändringen av ditt inlägg. Vi ber dig försöka igen."
@@ -3281,8 +3300,6 @@ sv:
           just_the_post: "Nej, bara det här inlägget"
         admin: "administratörsåtgärder för inlägg"
         admin_action: "Admin"
-        permanently_delete: "Radera permanent"
-        permanently_delete_confirmation: "Är du säker på att du permanent vill ta bort det här inlägget? Du kommer inte att kunna återställa den."
         wiki: "Skapa wiki"
         unwiki: "Ta bort wiki"
         convert_to_moderator: "Lägg till personalfärg"
@@ -3418,6 +3435,7 @@ sv:
       back: "Tillbaka till kategorin"
       general: "Allmänt"
       settings: "Inställningar"
+      moderation: "Moderering"
       advanced: "Avancerat"
       topic_template: "Mall"
       tags: "Taggar"

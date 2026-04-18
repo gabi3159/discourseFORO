@@ -2291,6 +2291,8 @@ hy:
       upload_description: "գրեք վերբեռնման նկարագրությունն այստեղ"
       list_item: "Ցանկի տարր"
       wrap_modal:
+        attribute_key: "Բանալի"
+        attribute_value: "Արժեք"
         apply: "Կիրառել"
       help: "Markdown-ի խմբագրման օգնություն"
       modal_ok: "Լավ"
@@ -2326,6 +2328,9 @@ hy:
       ignore: "Անտեսել"
       image: "նկար"
       link_toolbar:
+        copy: "Պատճենել հղումը"
+        link_copied: "Հղումը պատճենված է:"
+      onebox_toolbar:
         copy: "Պատճենել հղումը"
         link_copied: "Հղումը պատճենված է:"
     notifications:
@@ -2589,6 +2594,21 @@ hy:
         name: "Ջնջել"
       update_category:
         name: "Թարմացնել Կատեգորիան"
+    nested_replies:
+      sort:
+        label: "Դասավորել ըստ"
+        top: "Ամենահայտնի"
+        new: "Նոր"
+      load_more_children:
+        one: "%{count} պատասխան ևս"
+        other: "ևս %{count} պատասխան"
+      collapsed_replies:
+        one: "%{count} պատասխան"
+        other: "%{count} պատասխան"
+      collapse: "Կրճատել"
+      no_replies: "Պատասխաններ դեռևս չկան:"
+      deleted_post_placeholder: "[ջնջված է]"
+      pinned_reply: "Ամրակցված"
     topic:
       filter_to:
         one: "%{count} հրապարակում թեմայում"
@@ -2972,8 +2992,6 @@ hy:
           actions: "Գործողություններ"
           edit: "Խմբագրել"
           delete: "Ջնջել"
-        post_language_selector:
-          none: "Ոչ մի"
       errors:
         create: "Ներողություն, Ձեր գրառումը ստեղծելիս տեղի է ունեցել սխալ: Խնդրում ենք կրկին փորձել:"
         edit: "Ներողություն, Ձեր գրառումը խմբագրելիս տեղի է ունեցել սխալ: Խնդրում ենք կրկին փորձել:"
@@ -3117,6 +3135,7 @@ hy:
       view: "Դիտել Կատեգորիայի Թեմաները"
       general: "Ընդհանուր"
       settings: "Կարգավորումներ"
+      moderation: "Մոդերացիա"
       tags: "Պիտակներ"
       localization:
         name: "Անուն"

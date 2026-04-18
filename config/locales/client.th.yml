@@ -1436,6 +1436,7 @@ th:
       upload_description: "กรอกรายละเอียดการอัปโหลดที่นี่"
       list_item: "รายการ"
       wrap_modal:
+        attribute_value: "ค่า"
         apply: "นำไปใช้"
       help: "ช่วยเหลือการจัดรูปแบบ"
       modal_ok: "ตกลง"
@@ -1660,6 +1661,17 @@ th:
         name: "แทนที่แท็ก"
       delete_topics:
         name: "ลบ"
+    nested_replies:
+      sort:
+        label: "เรียงโดย"
+        top: "บน"
+        new: "ใหม่"
+      collapsed_replies:
+        other: "%{count} ตอบ"
+      collapse: "ย่อ"
+      no_replies: "ยังไม่มีคำตอบ"
+      deleted_post_placeholder: "[ลบ]"
+      pinned_reply: "ปักหมุดแล้ว"
     topic:
       filter_to:
         other: " %{count} โพสต์ในกระทู้"
@@ -1965,8 +1977,6 @@ th:
           actions: "การกระทำ"
           edit: "แก้ไข"
           delete: "ลบ"
-        post_language_selector:
-          none: "ไม่มี"
       errors:
         create: "ขออภัย เกิดความผิดพลาดขณะกำลังสร้างโพสต์ของคุณ กรุณาลองใหม่อีกครั้ง"
         edit: "ขออภัย เกิดความผิดพลาดขณะกำลังแก้ไขโพสต์ของคุณ กรุณาลองใหม่อีกครั้ง"

@@ -2969,6 +2969,8 @@ sk:
       upload_description: "tu zadajte popis uploadu"
       list_item: "Položka zoznamu"
       wrap_modal:
+        attribute_key: "Kľúč"
+        attribute_value: "Hodnota"
         apply: "Použi"
       help: "Nápoveda úprav pre Markdown"
       exit_fullscreen_prompt: "Stlačením <kbd>ESC</kbd> ukončíte celú obrazovku"
@@ -3036,6 +3038,9 @@ sk:
         copy: "Kopírovať odkaz"
         remove: "Odstrániť odkaz"
         visit: "Otvoriť odkaz na externej karte"
+        link_copied: "Odkaz skopírovaný!"
+      onebox_toolbar:
+        copy: "Kopírovať odkaz"
         link_copied: "Odkaz skopírovaný!"
     notifications:
       tooltip:
@@ -3532,6 +3537,24 @@ sk:
         name: "Označiť ako neprečítané"
       update_notifications:
         name: "Aktualizovať upozornenia"
+    nested_replies:
+      sort:
+        label: "Zoradiť podľa"
+        top: "Najlepšie"
+        new: "Nový"
+      load_more_children:
+        one: "%{count} ďalšia odpoveď"
+        few: "%{count} ďalšie odpovede"
+        many: "%{count} ďalších odpovedí"
+        other: "%{count} ďalších odpovedí"
+      collapsed_replies:
+        one: "%{count} odpoveď"
+        few: "%{count} odpovede"
+        many: "%{count} odpovedí"
+        other: "%{count} odpovedí"
+      collapse: "Zbaliť"
+      no_replies: "Zatiaľ žiadne odpovede."
+      pinned_reply: "Pripnutý"
     topic:
       filter_to:
         one: "%{count} príspevok k téme"
@@ -4121,7 +4144,7 @@ sk:
           confirm_delete: "Ste si istí, že chcete odstrániť preklady pre '%{languageCode}'?"
         success: "Preklady boli úspešne aktualizované"
         post_language_selector:
-          none: "Žiadny"
+          none: "Nie je nastavené"
         edit_warning:
           action_original: "Upraviť pôvodný príspevok"
           action_translation: "Upraviť tento preklad"
@@ -4146,6 +4169,7 @@ sk:
         attachment_download_requires_login: "Ľutujeme, pre stiahnutie príloh musíte byť prihlásený."
       cancel_composer:
         discard: "Zahodiť"
+        discard_edit: "Zahodenie zmien"
       via_email: "tento príspevok prišiel emailom"
       via_auto_generated_email: "tento príspevok prišiel prostredníctvom automaticky generovaného e-mailu"
       whisper: "tento príspevok je súkromným šepotom pre moderátorov"
@@ -4193,7 +4217,7 @@ sk:
         admin: "akcie administrátora príspevku"
         admin_action: "Admin"
         permanently_delete: "Natrvalo odstrániť"
-        permanently_delete_confirmation: "Naozaj chcete natrvalo odstrániť tento príspevok? Nebudete ho môcť obnoviť."
+        permanently_delete_confirm_phrase: "natrvalo odstrániť"
         wiki: "Spraviť Wiki"
         unwiki: "Odstrániť Wiki"
         convert_to_moderator: "Pridať farbu personálu"
@@ -4352,6 +4376,7 @@ sk:
       back: "Späť na kategóriu"
       general: "Všeobecné"
       settings: "Nastavenia"
+      moderation: "Moderovanie"
       advanced: "Pokročilé"
       topic_template: "Šablóna"
       tags: "Značky"
@@ -5631,7 +5656,6 @@ sk:
           header_description: "Uveďte tu informácie o tejto stránke a vašom tíme, aby sa ľudia dozvedeli, o čom je vaša komunita, kto za ňou stojí a ako vás môžu kontaktovať v prípade problému. Zobrazuje sa na <a href='%{basePath}/about'>stránke O</a> vašej lokalite."
         developer:
           title: "Vývojár"
-          header_description: "Nastavenia vývojára na ovládanie limitov rýchlosti, násobiteľov a výpočtov, bezpečného režimu a ďalších pokročilých funkcií"
         experimental:
           title: "Experimentálne"
           header_description: "Zapínanie alebo vypínanie experimentálnych funkcií na vašom webe, väčšinu z nich možno ovládať skupinovo."

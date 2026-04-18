@@ -3267,6 +3267,7 @@ uk:
       title: "Або натисніть %{modifier}Enter"
       save_and_close: "Зберегти та закрити"
       discard: "Відкинути"
+      cancel_edit: "Скасувати редагування"
       draft_saved: "Чернетку збережено!"
       users_placeholder: "Додайте користувачів або групи"
       title_placeholder: "Про що це обговорення, в одному короткому реченні?"
@@ -3329,6 +3330,8 @@ uk:
         name_label: "Назва обгортки"
         attributes_label: "Атрибути"
         add_attribute: "Додати атрибут"
+        attribute_key: "Ключ"
+        attribute_value: "Значення"
         remove_attribute: "Видалити атрибут"
         apply: "Застосувати"
         unwrap: "Розгорнути"
@@ -3418,6 +3421,13 @@ uk:
         copy: "Скопіювати посилання"
         remove: "Видалити посилання"
         visit: "Відкрити посилання у зовнішній вкладці"
+        link_copied: "Посилання скопійовано!"
+        load_preview: "Попередній перегляд"
+        preview_failed: "Не вдалося завантажити попередній перегляд"
+      onebox_toolbar:
+        copy: "Скопіювати посилання"
+        visit: "Відкрити посилання"
+        remove_preview: "Видалити попередній перегляд"
         link_copied: "Посилання скопійовано!"
       unsupported_token: "Редактор форматованого тексту не підтримує всі функції, що використовуються в цій публікації; ви перемикаєтесь на редактор Markdown."
     notifications:
@@ -3732,6 +3742,11 @@ uk:
     not_logged_in_user: "сторінка користувача з підсумком поточної діяльності та налаштуваннями"
     current_user: "перейти до вашої сторінки користувача"
     view_all: "переглянути всі %{tab}"
+    permanently_delete:
+      title: "Ви абсолютно впевнені?"
+      confirm_instruction: "Будь ласка, введіть <b>%{phrase}</b> нижче для підтвердження:"
+      controls:
+        delete: "Я розумію наслідки, видалити назавжди"
     user_menu:
       generic_no_items: "Немає елементів у цьому списку."
       sr_menu_tabs: "Вкладки меню користувача"
@@ -3808,6 +3823,8 @@ uk:
         clear_all: "Очистити все"
         unlist_topics: "Скасувати список тем"
         relist_topics: "Перебудувати список тем"
+        pin_topics: "Виділити ці теми"
+        unpin_topics: "Відкріпити теми"
         reset_bump_dates: "Скинути дату підняття"
         defer: "Позначити як непрочитане"
         delete: "Видалити теми"
@@ -3894,6 +3911,11 @@ uk:
           few: "Усі теґи будуть видалені з <b>%{count}</b> тем. Ви впевнені?"
           many: "Усі теґи будуть видалені з <b>%{count}</b> тем. Ви впевнені?"
           other: "Усі теґи буде видалено з <b>%{count}</b> тем. Ви впевнені?"
+        confirm_unpin_topics:
+          one: "Відкріпити %{count} тему"
+          few: "Відкріпити %{count} теми"
+          many: "Відкріпити %{count} тем"
+          other: "Відкріпити %{count} тем"
         confirm_update_topics:
           one: "Оновити %{count} тему"
           few: "Оновити %{count} теми"
@@ -4023,6 +4045,55 @@ uk:
       update_notifications:
         name: "Сповіщення про оновлення"
         description: "Оновіть свій особистий рівень сповіщень для вибраних тем до:"
+      pin_topics:
+        name: "Закріпити"
+      unpin_topics:
+        name: "Відкріпити"
+        description: "Відкріпити всі вибрані теми, закріплені в категорії або закріплені глобально"
+    nested_replies:
+      nested_view: "Вкладений вигляд"
+      flat_view: "Плоский вигляд"
+      view_as_nested: "Дивитись як вкладене"
+      view_as_flat: "Вигляд як плоский"
+      sort:
+        label: "Сортувати за"
+        top: "Топ"
+        new: "Новий"
+        old: "Старий"
+      load_more_children:
+        one: "Ще %{count} відповідь"
+        few: "Ще %{count} відповіді"
+        many: "Ще %{count} відповідей"
+        other: "Ще %{count} відповідей"
+      load_more_children_generic: "Більше відповідей"
+      continue_thread: "Продовжити цю тему"
+      new_replies:
+        one: "%{count} нова відповідь"
+        few: "%{count} нові відповіді"
+        many: "%{count} нових відповідей"
+        other: "%{count} нових відповідей"
+      collapsed_replies:
+        one: "%{count} відповідь"
+        few: "%{count} відповіді"
+        many: "%{count} відповідей"
+        other: "%{count} відповідь"
+      collapse: "Згорнути"
+      collapse_parent: "Згорнути батьківський потік"
+      category_settings:
+        default_nested_view: "Використовувати вкладений вигляд за замовчуванням для тем цієї категорії"
+      no_replies: "Ще не написав жодного повідомлення."
+      deleted_post_placeholder: "[вилучено]"
+      op_badge: "OP"
+      pinned_reply: "Закріплені"
+      pin_reply: "Закріпити вгорі"
+      unpin_reply: "Відкріпити"
+      topic_admin_menu:
+        enable_nested_replies: "Увімкнути вкладені відповіді"
+        disable_nested_replies: "Вимкнути вкладені відповіді"
+      context:
+        banner: "Ви переглядаєте одну тему в цій гілці."
+        view_full_topic: "Переглянути всю тему"
+        view_parent_context: "Переглянути батьківський контекст"
     topic:
       filter_to:
         one: "%{count} допис в темі"
@@ -4176,6 +4247,7 @@ uk:
         publish_to: "Публікувати в:"
         when: "Коли:"
         time_frame_required: "Будь ласка, виберіть проміжок часу"
+        category_required: "Будь ласка, виберіть категорію"
         min_duration: "Тривалість повинна бути більше ніж 0"
         max_duration: "Тривалість повинна бути менше ніж 20 років"
         duration: "Тривалість"
@@ -4371,6 +4443,12 @@ uk:
         banner_note: "Користувачі можуть закривати оголошення, кожен сам для себе, після чого воно більше не буде для них покиваться. Тільки одна тема може бути зроблена активним оголошенням в будь-який момент часу."
         no_banner_exists: "Немає поточних тем-оголошень."
         banner_exists: "На даний момент <strong class='badge badge-notification unread'>вже є</strong> тема-оголошення."
+      bulk_feature_topic:
+        pin: "Зробіть так, щоб ці теми відображалися у верхній частині категорії теми, доки"
+        pin_note: "Користувачі можуть відкріплювати теми окремо для себе."
+        pin_globally: "Зробити ці теми на початку всіх списків тем, доки"
+        pin_button: "Закріпити теми"
+        pin_globally_button: "Закріпити теми глобально"
       inviting: "Запрошення…"
       automatically_add_to_groups: "Це запрошення надасть доступ до таких груп:"
       invite_private:
@@ -4661,7 +4739,8 @@ uk:
         success: "Переклади були успішно оновлені"
         post_language_selector:
           title: "Мова публікації"
-          none: "Немає"
+          header: "Це повідомлення знаходиться в…"
+          none: "Не встановлено"
         edit_warning:
           message: "Це перекладена публікація.<br><br> Ви хочете відредагувати оригінальний допис на %{language} або відредагувати цей конкретний переклад?"
           action_original: "Редагувати оригінальний допис"
@@ -4687,7 +4766,9 @@ uk:
         attachment_download_requires_login: "Вибачте, вам потрібно увійти, щоб завантажити вкладення."
       cancel_composer:
         confirm: "Ви хочете видалити свою публікацію?"
+        confirm_edit: "Ви хочете скасувати свої зміни?"
         discard: "Відкинути"
+        discard_edit: "Скасувати зміни"
       via_email: "цей допис надійшов електронною поштою"
       via_auto_generated_email: "цей допис прийшов з автоматично згенерованого e-mail"
       whisper: "це внутрішній допис, тобто його видно тільки модераторам"
@@ -4713,6 +4794,7 @@ uk:
         delete: "видалити цей допис"
         undelete_action: "Відновити повідомлення"
         undelete: "скасувати видалення цього допису"
+        view_deleted: "переглянути вміст видаленого допису"
         share_action: "Поширити"
         share: "поширити посилання на цей допис"
         copy_action: "Скопіювати посилання"
@@ -4735,13 +4817,19 @@ uk:
         admin: "дії адміністратора з дописом"
         admin_action: "Адміністратор"
         permanently_delete: "Видалити назавжди"
-        permanently_delete_confirmation: "Ви впевнені, що хочете назавжди видалити цей допис? Ви не зможете його відновити."
+        permanently_delete_post_confirmation: "Цю дію <b>неможливо</b> скасувати. Це призведе до <b>остаточного видалення</b> цієї публікації та її видалення з бази даних."
+        permanently_delete_topic_confirmation: "Цю дію <b>неможливо</b> скасувати. Це призведе до <b>остаточного видалення</b> цієї теми та її видалення з бази даних."
+        permanently_delete_confirm_phrase: "видалити назавжди"
         wiki: "Створити Wiki"
+        wiki_description: "дозволити дозволеним групам редагувати цей допис"
         unwiki: "Видалити Wiki"
         convert_to_moderator: "Додати колір команди обслуговування"
+        convert_to_moderator_description: "виділити зміст цього допису"
         revert_to_regular: "Прибрати колір команди обслуговування"
         rebake: "Перебудувати HTML"
+        rebake_description: "переробити цей допис, щоб виправити форматування або вбудовування"
         publish_page: "Публікація сторінки"
+        publish_page_description: "опублікуйте цю тему як окрему сторінку"
         unhide: "Знову зробити видимим"
         change_owner: "Змінити власника…"
         grant_badge: "Нагородити…"
@@ -4749,6 +4837,7 @@ uk:
         lock_post_description: "заборонити автору редагувати цей допис"
         unlock_post: "Розблокувати допис"
         unlock_post_description: "Дозволити автору редагувати цей допис"
+        add_post_notice_description: "додати виділене повідомлення над цим дописом"
         delete_topic_disallowed_modal: "У вас немає дозволу на видалення цієї теми. Якщо ви дійсно хочете, щоб вона була видалена, використовуйте функцію повідомлення модератору разом з аргументацією."
         delete_topic_disallowed: "у вас немає дозволу на видалення цієї теми"
         delete_topic_confirm_modal:
@@ -4897,6 +4986,7 @@ uk:
       back: "Повернутися до розділу"
       general: "Основне"
       settings: "Налаштування"
+      moderation: "Модерація"
       advanced: "Розширений"
       show_advanced: "Розширені налаштування"
       topic_template: "Шаблон"
@@ -5043,6 +5133,8 @@ uk:
       require_reply_approval: "Вимагати схвалення модератором усіх нових відповідей"
       require_topic_approval_for: "Вимагати схвалення модератором нових тем для..."
       require_reply_approval_for: "Вимагати схвалення модератора для нових відповідей..."
+      new_topic_approval: "Схвалення нової теми"
+      new_reply_approval: "Схвалення нової відповіді"
       posting_review_modes:
         no_one: "Ніхто"
         everyone: "Усі"
@@ -6310,6 +6402,8 @@ uk:
         permanent_no_group_selection: "Н/Д, постійні зміни застосовуються до всіх груп."
         no_changes: "Наразі жодних змін не планується."
         preview: "Попередній перегляд"
+        default_warning: "Значення за замовчуванням для цього параметра змінилося з %{oldDefaultValue} на %{newDefaultValue} через <a href='%{basePath}/admin/config/upcoming-changes?changeNamesFilter=%{changeNamesFilter}'>майбутню зміну</a>."
+        default_warning_short: "Значення за замовчуванням для цього параметра змінилося, докладніше про це читайте на сторінці <a href='%{basePath}/admin/config/upcoming-changes?changeNamesFilter=%{changeNamesFilter}'>майбутніх змін</a>."
         enabled_for_options:
           no_one: "Ніхто"
           everyone: "Усі"
@@ -6349,6 +6443,7 @@ uk:
           impact_type_all: "Всі види впливу"
           impact_type_feature: "Особливість"
           impact_type_other: "Інше"
+          impact_type_site_setting_default: "Налаштування за замовчуванням"
           status_all: "Усі статуси"
           status_conceptual: "Концептуальний"
           status_experimental: "Експериментальний"
@@ -6368,7 +6463,6 @@ uk:
           header_description: "Надайте тут інформацію про цей сайт та вашу команду, щоб люди могли дізнатися, чим займається ваша спільнота, хто за нею стоїть і як зв'язатися з вами у разі виникнення проблеми. Відображається на сторінці <a href='%{basePath}/about'>Про сайт</a>."
         developer:
           title: "Для розробників"
-          header_description: "Налаштування розробника для контролю лімітів частот, множників та обчислень, безпечного режиму та інших розширених функцій"
         experimental:
           title: "Експериментальний"
           header_description: "Увімкніть або вимкніть експериментальні функції для свого сайту, більшістю з них можна керувати на груповій основі"
@@ -6803,8 +6897,6 @@ uk:
         new_features:
           title: "Що нового?"
           subtitle: "Ми постійно випускаємо нові функції та вдосконалення. На цій сторінці ви знайдете найголовніші з них, але ви можете натиснути \"Дізнатися більше\", щоб переглянути докладнішу інформацію про випуск."
-          no_new_features_found: "У стрічці немає елементів, або вибраний вами фільтр не повернув результатів. Ви можете переглянути попередні анонси нових функцій у <a href='%{url}' target='_blank'>спільноті Discourse Meta</a>."
-          no_new_features_error: "Сталася помилка під час завантаження стрічки. Ви можете переглянути попередні анонси нових функцій у <a href='%{url}' target='_blank'>спільноті Discourse Meta</a>."
           learn_more: "Дізнатися більше…"
         last_checked: "Остання перевірка"
         refresh_problems: "Оновити"
@@ -7845,7 +7937,6 @@ uk:
             button: "Змінити джерело"
             title: "Змінити джерело теми"
             repository_url: "URL репозиторія"
-            branch: "Гілка (необов'язково)"
             updating: "Оновлення джерела теми…"
             update: "Джерело оновлення"
             has_existing_key: "Ця тема має налаштований SSH-ключ."

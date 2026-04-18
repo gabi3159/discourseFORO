@@ -20,6 +20,8 @@ de:
         reaction_group:
           one: "%{reaction}: %{count} Benutzer"
           other: "%{reaction}: %{count} Benutzer"
+      reaction:
+        forbidden: "Du darfst nicht auf diesen Beitrag reagieren oder deine Reaktion ändern."
       picker:
         react_with: "Reagiere auf diesen Beitrag mit: %{reaction}"
         cant_remove_reaction: "Du kannst deine Reaktion nicht mehr entfernen"

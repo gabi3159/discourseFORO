@@ -2797,6 +2797,8 @@ fi:
       list_item: "Luettelokohde"
       toggle_direction: "Vaihda suuntaa"
       wrap_modal:
+        attribute_key: "Avain"
+        attribute_value: "Arvo"
         apply: "Käytä"
       help: "Markdown-muokkausohje"
       exit_fullscreen_prompt: "Poistu koko näytön tilasta painamalla <kbd>Esc</kbd>-näppäintä"
@@ -2865,6 +2867,9 @@ fi:
         copy: "Kopioi linkki"
         remove: "Poista linkki"
         visit: "Avaa linkki ulkoisessa välilehdessä"
+        link_copied: "Linkki kopioitu!"
+      onebox_toolbar:
+        copy: "Kopioi linkki"
         link_copied: "Linkki kopioitu!"
     notifications:
       tooltip:
@@ -3295,6 +3300,21 @@ fi:
         name: "Merkitse lukemattomaksi"
       update_notifications:
         name: "Päivitä ilmoitukset"
+    nested_replies:
+      sort:
+        label: "Järjestys"
+        top: "Suositut"
+        new: "Uudet"
+      load_more_children:
+        one: "%{count} muu kommentti"
+        other: "%{count} muuta kommenttia"
+      collapsed_replies:
+        one: "%{count} vastaus"
+        other: "%{count} vastausta"
+      collapse: "Kutista"
+      no_replies: "Ei vielä vastauksia."
+      deleted_post_placeholder: "[poistettu]"
+      pinned_reply: "Kiinnitetty"
     topic:
       filter_to:
         one: "%{count} viesti ketjussa"
@@ -3822,7 +3842,7 @@ fi:
           confirm_delete: "Oletko varma, että haluat poistaa käännökset kielelle '%{languageCode}'?"
         success: "Käännökset on päivitetty onnistuneesti"
         post_language_selector:
-          none: "Ei valittu"
+          none: "Ei asetettu"
         edit_warning:
           action_original: "Muokkaa alkuperäistä viestiä"
           action_translation: "Muokkaa tätä käännöstä"
@@ -3845,6 +3865,7 @@ fi:
         attachment_download_requires_login: "Sinun täytyy kirjautua sisään, jotta voit ladata liitetiedostoja."
       cancel_composer:
         discard: "Hylkää"
+        discard_edit: "Hylkää muutokset"
       via_email: "tämä viesti lähetettiin sähköpostitse"
       via_auto_generated_email: "tämä viesti saapui automaattisesti luotuna sähköpostina"
       whisper: "tämä viesti on yksityinen kuiskaus valvojille"
@@ -3888,7 +3909,7 @@ fi:
         admin: "viestin ylläpitotoimet"
         admin_action: "Ylläpitäjä"
         permanently_delete: "Poista pysyvästi"
-        permanently_delete_confirmation: "Haluatko varmasti poistaa tämän viestin pysyvästi? Et voi palauttaa sitä."
+        permanently_delete_confirm_phrase: "poista pysyvästi"
         wiki: "Tee wiki"
         unwiki: "Poista wiki"
         convert_to_moderator: "Lisää henkilökunnan taustaväri"
@@ -4033,6 +4054,7 @@ fi:
       back: "Takaisin alueelle"
       general: "Yleistä"
       settings: "Asetukset"
+      moderation: "Valvonta"
       advanced: "Lisäasetukset"
       topic_template: "Malli"
       tags: "Tunnisteet"
@@ -5229,7 +5251,6 @@ fi:
           header_description: "Anna tässä tietoja tästä sivustosta ja tiimistäsi, jotta ihmiset voivat oppia, mistä yhteisöstäsi on kyse, kuka sen takana on ja miten sinuun voi ottaa yhteyttä ongelmatilanteissa. Näytetään sivustosi <a href='%{basePath}/about'>Tietoa-sivulla</a>."
         developer:
           title: "Kehittäjä"
-          header_description: "Kehittäjäasetukset, joilla voi hallita nopeusrajoja, kertoimia ja laskelmia, vikasietotilaa ja muita edistyneitä ominaisuuksia"
         experimental:
           title: "Kokeellinen"
           header_description: "Ota sivustosi kokeellisia ominaisuukssia käyttöön tai poista niitä käytöstä. Useimpia niistä voi hallita ryhmäkohtaisesti."

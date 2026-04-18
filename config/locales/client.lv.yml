@@ -1712,6 +1712,7 @@ lv:
       upload_description: "pievienojiet faila aprakstu"
       list_item: "Saraksta punkts"
       wrap_modal:
+        attribute_value: "Vērtība"
         apply: "Pielietot"
       help: "Palīdzība ar formatēšanu, izmantojot Markdown"
       modal_ok: "Labi"
@@ -1912,6 +1913,23 @@ lv:
         name: "Aizvietot tagus"
       delete_topics:
         name: "Dzēst"
+    nested_replies:
+      sort:
+        label: "Kārtot pēc"
+        top: "Populārākās"
+        new: "Jauns"
+      load_more_children:
+        zero: "vel %{count} atbildes"
+        one: "vel %{count} atbilde"
+        other: "vel %{count} atbildes"
+      collapsed_replies:
+        zero: "%{count} atbildes"
+        one: "%{count} atbilde"
+        other: "%{count} atbildes"
+      collapse: "Sakļaut"
+      no_replies: "Vēl nav atbilžu."
+      deleted_post_placeholder: "[dzēsts]"
+      pinned_reply: "Piesprausts"
     topic:
       filter_to:
         zero: "tēmā ziņu nav"
@@ -2224,8 +2242,6 @@ lv:
           actions: "Darbības"
           edit: "Rediģēt"
           delete: "Dzēst"
-        post_language_selector:
-          none: "Nav"
       errors:
         create: "Atvainojiet, izveidojot jūsu ierakstu, notika kļūda. Lūdzu, mēģiniet vēlreiz."
         edit: "Atvainojiet, rediģējot jūsu ierakstu, notika kļūda. Lūdzu, mēģiniet vēlreiz."

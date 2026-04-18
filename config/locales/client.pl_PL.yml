@@ -3262,6 +3262,7 @@ pl_PL:
       title: "Lub naciśnij %{modifier}Enter"
       save_and_close: "Zapisz i zamknij"
       discard: "Odrzuć"
+      cancel_edit: "Anuluj edycję"
       draft_saved: "Szkic zapisany!"
       users_placeholder: "Dodaj użytkowników lub grupy"
       title_placeholder: "O czym jest ta dyskusja w jednym zwartym zdaniu. "
@@ -3324,6 +3325,8 @@ pl_PL:
         name_label: "Zawiń nazwę"
         attributes_label: "Atrybuty"
         add_attribute: "Dodaj atrybut"
+        attribute_key: "Klucz"
+        attribute_value: "Wartość"
         remove_attribute: "Usuń atrybut"
         apply: "Zastosuj"
         unwrap: "Rozwiń"
@@ -3413,6 +3416,13 @@ pl_PL:
         copy: "Skopiuj link"
         remove: "Usuń link"
         visit: "Otwórz link w karcie zewnętrznej"
+        link_copied: "Link skopiowany!"
+        load_preview: "Załaduj podgląd"
+        preview_failed: "Nie można załadować podglądu"
+      onebox_toolbar:
+        copy: "Skopiuj link"
+        visit: "Otwórz link"
+        remove_preview: "Usuń podgląd"
         link_copied: "Link skopiowany!"
       unsupported_token: "Edytor tekstu sformatowanego nie obsługuje wszystkich funkcji przedstawionych w tym poście; w związku z tym przełączymy Cię do edytora Markdown."
     notifications:
@@ -3727,6 +3737,11 @@ pl_PL:
     not_logged_in_user: "strona użytkownika z podsumowaniem bieżących działań i ustawień"
     current_user: "idź do swojej strony użytkowanika"
     view_all: "zobacz wszystkie %{tab}"
+    permanently_delete:
+      title: "Czy na pewno?"
+      confirm_instruction: "Wpisz poniżej <b>%{phrase}</b> , aby potwierdzić:"
+      controls:
+        delete: "Rozumiem konsekwencje, usuń na stałe"
     user_menu:
       generic_no_items: "Na tej liście nie ma żadnych pozycji."
       sr_menu_tabs: "Zakładki menu użytkownika"
@@ -3803,6 +3818,8 @@ pl_PL:
         clear_all: "Wyczyść wszystko"
         unlist_topics: "Usuń tematy z listy"
         relist_topics: "Zamieść ponownie tematy"
+        pin_topics: "Wyróżnij te tematy"
+        unpin_topics: "Odepnij tematy"
         reset_bump_dates: "Zresetuj datę podbicia"
         defer: "Oznacz jako nieprzeczytany"
         delete: "Usuń tematy"
@@ -3889,6 +3906,11 @@ pl_PL:
           few: "Wszystkie tagi zostaną usunięte z <b>%{count}</b> tematów. Jesteś pewny?"
           many: "Wszystkie tagi zostaną usunięte z <b>%{count}</b> tematów. Jesteś pewny?"
           other: "Wszystkie tagi zostaną usunięte z <b>%{count}</b> tematów. Jesteś pewny?"
+        confirm_unpin_topics:
+          one: "Odepnij %{count} temat"
+          few: "Odepnij %{count} tematy"
+          many: "Odepnij %{count} tematów"
+          other: "Odepnij %{count} tematów"
         confirm_update_topics:
           one: "Zaktualizuj %{count} temat"
           few: "Zaktualizuj %{count} tematy"
@@ -4018,6 +4040,55 @@ pl_PL:
       update_notifications:
         name: "Aktualizuj powiadomienia"
         description: "Zaktualizuj swój osobisty poziom powiadomień dla wybranych tematów, aby:"
+      pin_topics:
+        name: "Przypnij"
+      unpin_topics:
+        name: "Odepnij"
+        description: "Odepnij wszystkie wybrane tematy, które są przypięte do kategorii lub przypięte globalnie"
+    nested_replies:
+      nested_view: "Widok zagnieżdżony"
+      flat_view: "Widok płaski"
+      view_as_nested: "Wyświetl jako zagnieżdżone"
+      view_as_flat: "Wyświetl jako płaskie"
+      sort:
+        label: "Sortuj po"
+        top: "Popularne"
+        new: "Nowe"
+        old: "Stare"
+      load_more_children:
+        one: "%{count} odpowiedź więcej"
+        few: "%{count} odpowiedzi więcej"
+        many: "%{count} odpowiedzi więcej"
+        other: "%{count} odpowiedzi więcej"
+      load_more_children_generic: "Więcej odpowiedzi"
+      continue_thread: "Kontynuuj ten wątek"
+      new_replies:
+        one: "%{count} nowa odpowiedź"
+        few: "%{count} nowe odpowiedzi"
+        many: "%{count} nowych odpowiedzi"
+        other: "%{count} nowych odpowiedzi"
+      collapsed_replies:
+        one: "%{count} odpowiedź"
+        few: "%{count} odpowiedzi"
+        many: "%{count} odpowiedzi"
+        other: "%{count} odpowiedzi"
+      collapse: "Zwiń"
+      collapse_parent: "Zwiń wątek nadrzędny"
+      category_settings:
+        default_nested_view: "Użyj widoku zagnieżdżonego jako domyślnego dla tematów w tej kategorii"
+      no_replies: "Nie ma jeszcze odpowiedzi."
+      deleted_post_placeholder: "[usunięty]"
+      op_badge: "OP"
+      pinned_reply: "Przypięty"
+      pin_reply: "Przypnij na górę"
+      unpin_reply: "Odepnij"
+      topic_admin_menu:
+        enable_nested_replies: "Włącz zagnieżdżone odpowiedzi"
+        disable_nested_replies: "Wyłącz zagnieżdżone odpowiedzi"
+      context:
+        banner: "Przeglądasz pojedynczy wątek z tego tematu."
+        view_full_topic: "Zobacz cały temat"
+        view_parent_context: "Wyświetl kontekst nadrzędny"
     topic:
       filter_to:
         one: "%{count} post w temacie"
@@ -4171,6 +4242,7 @@ pl_PL:
         publish_to: "Opublikuj do:"
         when: "Kiedy:"
         time_frame_required: "Wybierz przedział czasowy"
+        category_required: "Wybierz kategorię"
         min_duration: "Czas trwania musi być większy niż 0"
         max_duration: "Czas trwania musi być krótszy niż 20 lat"
         duration: "Czas trwania"
@@ -4366,6 +4438,12 @@ pl_PL:
         banner_note: "Użytkownicy mogą usunąć baner zamykając go przyciskiem. Tylko jeden temat może być banerem w danej chwili."
         no_banner_exists: "Baner nie jest obecnie ustawiony."
         banner_exists: "Baner <strong class='badge badge-notification unread'>jest</strong> obecnie ustawiony."
+      bulk_feature_topic:
+        pin: "Spraw, aby te tematy wyświetlały się na górze kategorii tematów, aż do"
+        pin_note: "Użytkownicy mogą odpinać tematy indywidualnie dla siebie."
+        pin_globally: "Spraw, aby te tematy wyświetlały się na górze wszystkich list tematów, aż do"
+        pin_button: "Przypnij tematy"
+        pin_globally_button: "Przypnij tematy globalnie"
       inviting: "Zapraszam…"
       automatically_add_to_groups: "To zaproszenie obejmuje również dostęp do tych grup:"
       invite_private:
@@ -4656,7 +4734,8 @@ pl_PL:
         success: "Tłumaczenia zostały pomyślnie zaktualizowane"
         post_language_selector:
           title: "Język wpisu"
-          none: "Brak"
+          header: "Ten wpis jest w…"
+          none: "Nie ustawiono"
         edit_warning:
           message: "To jest przetłumaczony wpis.<br><br>Czy chcesz edytować oryginalny wpis w języku %{language} czy edytować to konkretne tłumaczenie?"
           action_original: "Edytuj oryginalny wpis"
@@ -4682,7 +4761,9 @@ pl_PL:
         attachment_download_requires_login: "Przepraszamy, musisz się zalogować, aby pobierać załączniki."
       cancel_composer:
         confirm: "Czy chcesz usunąć swój wpis?"
+        confirm_edit: "Czy chcesz odrzucić zmiany?"
         discard: "Odrzuć"
+        discard_edit: "Odrzuć zmiany"
       via_email: "ten wpis został dodany emailem"
       via_auto_generated_email: "ten wpis został dodany poprzez automatycznie wygenerowaną wiadomość e-mail"
       whisper: "ten wpis jest prywatnym szeptem do moderatorów"
@@ -4708,6 +4789,7 @@ pl_PL:
         delete: "usuń ten wpis"
         undelete_action: "Cofnij usunięcie wpisu"
         undelete: "przywróc ten wpis"
+        view_deleted: "zobacz usuniętą treść wpisu"
         share_action: "Udostępnij"
         share: "udostępnij odnośnik do tego wpisu"
         copy_action: "Skopiuj link"
@@ -4730,13 +4812,19 @@ pl_PL:
         admin: "administracja wpisem (tryb wiki itp)"
         admin_action: "Administratorzy"
         permanently_delete: "Usuń bezpowrotnie"
-        permanently_delete_confirmation: "Czy na pewno chcesz usunąć ten post? Nie będziesz w stanie go odzyskać."
+        permanently_delete_post_confirmation: "Tej czynności <b>nie można</b> cofnąć. Spowoduje to <b>trwałe usunięcie</b> tego wpisu i usunięcie go z bazy danych."
+        permanently_delete_topic_confirmation: "Tej czynności <b>nie można</b> cofnąć. Spowoduje to <b>trwałe usunięcie</b> tego tematu i usunięcie go z bazy danych."
+        permanently_delete_confirm_phrase: "usuń bezpowrotnie"
         wiki: "Włącz tryb Wiki"
+        wiki_description: "pozwól dozwolonym grupom edytować ten wpis"
         unwiki: "Wyłącz tryb Wiki"
         convert_to_moderator: "Włącz kolor moderatora"
+        convert_to_moderator_description: "wyróżnij treść tego wpisu"
         revert_to_regular: "Wyłącz kolor moderatora"
         rebake: "Odśwież HTML"
+        rebake_description: "przetwórz ten wpis ponownie, aby naprawić formatowanie lub osadzenia"
         publish_page: "Publikowanie strony"
+        publish_page_description: "opublikuj ten temat jako osobną stronę"
         unhide: "Wycofaj ukrycie"
         change_owner: "Zmień właściciela…"
         grant_badge: "Przyznaj odznakę…"
@@ -4744,6 +4832,7 @@ pl_PL:
         lock_post_description: "nie pozwalaj postującemu edytować tego wpisu"
         unlock_post: "Odblokuj wpis"
         unlock_post_description: "zezwól postującemu na edycję tego wpisu"
+        add_post_notice_description: "dodaj wyróżnioną informację powyżej tego wpisu"
         delete_topic_disallowed_modal: "Nie masz uprawnień do usunięcia tego tematu. Jeśli naprawdę chcesz go usunąć, prześlij flagę do moderatora wraz z uzasadnieniem."
         delete_topic_disallowed: "nie masz uprawnień do usunięcia tego tematu"
         delete_topic_confirm_modal:
@@ -4892,6 +4981,7 @@ pl_PL:
       back: "Powrót do kategorii"
       general: "Ogólne"
       settings: "Ustawienia"
+      moderation: "Moderacja"
       advanced: "Zaawansowane"
       show_advanced: "Ustawienia zaawansowane"
       topic_template: "Szablon"
@@ -5038,11 +5128,15 @@ pl_PL:
       require_reply_approval: "Wymagaj zatwierdzenia moderatora dla wszystkich nowych odpowiedzi"
       require_topic_approval_for: "Wymagaj zatwierdzenia nowych tematów przez moderatora..."
       require_reply_approval_for: "Wymagaj zatwierdzenia nowych odpowiedzi przez moderatora..."
+      new_topic_approval: "Zatwierdzenie nowego tematu"
+      new_reply_approval: "Zatwierdzenie nowej odpowiedzi"
       posting_review_modes:
         no_one: "Nikt"
         everyone: "Wszyscy"
         everyone_except: "Wszyscy oprócz wybranych grup"
         no_one_except: "Nikt oprócz wybranych grup"
+      posting_review_groups_require_approval: "Grupy wymagające zatwierdzenia"
+      posting_review_groups_no_approval: "Grupy niewymagające zatwierdzenia"
       posting_review_groups_placeholder: "Wybierz grupy..."
       this_year: "ten rok"
       position: "Pozycja na stronie kategorii:"
@@ -6364,7 +6458,7 @@ pl_PL:
           header_description: "Tutaj podaj informacje o tej stronie i swoim zespole, aby ludzie mogli dowiedzieć się, o czym jest Twoja społeczność, kto za nią stoi i jak się z Tobą skontaktować w razie problemów. Wyświetlane na stronie <a href='%{basePath}/about'>O stronie</a> Twojej witryny."
         developer:
           title: "Deweloperskie"
-          header_description: "Ustawienia deweloperskie do kontrolowania limitów szybkości, mnożników i obliczeń, trybu bezpiecznego i innych zaawansowanych funkcji."
+          header_description: "Ustawienia programistyczne umożliwiające sterowanie trybem awaryjnym i innymi zaawansowanymi funkcjami"
         experimental:
           title: "Eksperymentalne"
           header_description: "Włączaj lub wyłączaj eksperymentalne funkcje dla swojej witryny, większość z nich może być kontrolowana dla grupy."
@@ -6799,8 +6893,8 @@ pl_PL:
         new_features:
           title: "Co nowego?"
           subtitle: "Cały czas udostępniamy nowe funkcje i ulepszenia. Ta strona obejmuje najważniejsze z nich, ale możesz kliknąć 'Dowiedz się więcej', aby zobaczyć obszerne informacje o wersji."
-          no_new_features_found: "Brak elementów w kanale lub wybrany filtr nie zwrócił żadnych wyników. Poprzednie ogłoszenia o nowych funkcjach można zobaczyć w <a href='%{url}' target='_blank'>społeczności Discourse Meta</a>."
-          no_new_features_error: "Wystąpił błąd podczas ładowania kanału. Poprzednie ogłoszenia o nowych funkcjach można zobaczyć w <a href='%{url}' target='_blank'>społeczności Discourse Meta</a>."
+          no_new_features_found: "Brak elementów w kanale lub wybrany filtr nie zwrócił żadnych wyników. Poprzednie ogłoszenia o nowych funkcjach można zobaczyć na <a href='%{url}' target='_blank'>stronie Discourse Releases</a>."
+          no_new_features_error: "Wystąpił błąd podczas ładowania kanału. Poprzednie ogłoszenia o nowych funkcjach można zobaczyć na <a href='%{url}' target='_blank'>stronie Discourse Releases</a>."
           learn_more: "Dowiedz się więcej..."
         last_checked: "Ostatnio sprawdzana"
         refresh_problems: "Odśwież"
@@ -7841,7 +7935,7 @@ pl_PL:
             button: "Zmień źródło"
             title: "Zmień źródło motywu"
             repository_url: "Adres URL repozytorium"
-            branch: "Gałąź (opcjonalnie)"
+            branch: "Gałąź"
             updating: "Aktualizowanie źródła motywu…"
             update: "Aktualizuj źródło"
             has_existing_key: "W tym motywie skonfigurowano istniejący klucz SSH."
@@ -9043,6 +9137,7 @@ pl_PL:
           groups: "Grupy"
           dashboard: "Panel"
           navigation: "Nawigacja"
+          nested_replies: "Zagnieżdżone odpowiedzi"
           experimental: "Eksperymentalne"
         secret_list:
           invalid_input: "Pola tekstowe nie mogą być puste ani zawierać znaku pionowej kreski."
@@ -9087,6 +9182,9 @@ pl_PL:
           clean_up_inactive_users_after_days:
             prompt: "Ustawienie tej wartości na inną niż 0 spowoduje trwałe usunięcie użytkowników, którzy nie będą aktywni przez określoną liczbę dni. Czy na pewno chcesz kontynuować?"
             confirm: "Tak, rozumiem, że nieaktywni użytkownicy zostaną trwale usunięci, chyba że ustawię tę wartość na 0"
+          can_permanently_delete:
+            prompt: "Włączenie tej opcji umożliwia administratorom trwałe usuwanie wpisów, tematów i wersji wpisów. Trwale usuniętych danych nie można odzyskać. Może to również wpłynąć na integralność danych i zerwanie istniejących linków."
+            confirm: "Tak, rozumiem, że trwale usuniętych danych nie da się odzyskać"
         job_status:
           completed: "Aktualizacja ukończona"
           enqueued: "Aktualizacja w toku"

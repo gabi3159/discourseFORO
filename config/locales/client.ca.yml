@@ -1733,6 +1733,8 @@ ca:
       upload_description: "escriviu aquí una descripció del fitxer que es carrega"
       list_item: "Element de llista"
       wrap_modal:
+        attribute_key: "Clau"
+        attribute_value: "Valor"
         apply: "Aplica"
       help: "Ajuda d'edició Markdown"
       modal_ok: "D'acord"
@@ -1988,6 +1990,21 @@ ca:
         name: "Reemplaça etiquetes"
       delete_topics:
         name: "Suprimeix"
+    nested_replies:
+      sort:
+        label: "Ordena per"
+        top: "Principals"
+        new: "Nou"
+      load_more_children:
+        one: "%{count} resposta més"
+        other: "%{count} respostes més "
+      collapsed_replies:
+        one: "%{count} resposta"
+        other: "%{count} respostes"
+      collapse: "Redueix"
+      no_replies: "Encara sense respostes"
+      deleted_post_placeholder: "[suprimit]"
+      pinned_reply: "Afixat"
     topic:
       filter_to:
         one: "%{count} publicació en el tema"
@@ -2336,8 +2353,6 @@ ca:
           actions: "Accions"
           edit: "Edita"
           delete: "Suprimeix"
-        post_language_selector:
-          none: "Cap"
       errors:
         create: "S'ha produït un error en crear la vostra publicació. Torneu-ho a provar."
         edit: "S'ha produït un error en editar la vostra publicació. Torneu-ho a provar."
@@ -2465,6 +2480,7 @@ ca:
       view: "Mostra temes per categories"
       general: "General"
       settings: "Configuració"
+      moderation: "Moderació"
       tags: "Etiquetes"
       localization:
         name: "Nom"

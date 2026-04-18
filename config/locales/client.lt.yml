@@ -2458,6 +2458,8 @@ lt:
       upload_description: "įveskite čia nuorodos aprašymą"
       list_item: "Įkelti"
       wrap_modal:
+        attribute_key: "Raktas"
+        attribute_value: "Reikšmė"
         apply: "Kandidatuoti"
       help: "Markdown redagavimo pagalba"
       modal_ok: "OK"
@@ -2498,6 +2500,8 @@ lt:
       reload: "Įkelti iš naujo"
       ignore: "Ignoruoti"
       image: "paveikslėlis"
+      onebox_toolbar:
+        copy: "Nukopijuoti nuorodą"
     notifications:
       tooltip:
         regular:
@@ -2794,6 +2798,25 @@ lt:
         name: "Pakeisti žymas"
       delete_topics:
         name: "Pašalinti"
+    nested_replies:
+      sort:
+        label: "Rūšiuoti pagal"
+        top: "Populiarios"
+        new: "Naujas"
+      load_more_children:
+        one: "dar %{count} atsakymas"
+        few: "dar %{count} atsakymai"
+        many: "dar %{count} atsakymų"
+        other: "dar %{count} atsakymų"
+      collapsed_replies:
+        one: "%{count} atsakymas"
+        few: "%{count} atsakymai"
+        many: "%{count} atsakymai"
+        other: "%{count} atsakymai"
+      collapse: "Suskleisti"
+      no_replies: "Jokių atsakymų nerasta."
+      deleted_post_placeholder: "[ištrinta]"
+      pinned_reply: "Prisegta"
     topic:
       filter_to:
         one: "temoje %{count} įrašas"
@@ -3220,8 +3243,6 @@ lt:
           actions: "Veiksmai"
           edit: "Redaguoti"
           delete: "Pašalinti"
-        post_language_selector:
-          none: "Nieko"
       errors:
         create: "Atsiprašome, įvyko klaida kuriant įrašą. Prašome pamėginti dar kartą."
         edit: "Atsiprašome, įvyko klaida redaguojant įrašą. Prašome pamėginti dar kartą."
@@ -3272,8 +3293,6 @@ lt:
           just_the_post: "Ne, tik šį įrašą"
         admin: "įrašo administravimas"
         admin_action: "Administratorius"
-        permanently_delete: "Ištrinti visam laikui"
-        permanently_delete_confirmation: "Ar tikrai norite visam laikui ištrinti šį įrašą? Jūs negalėsite jo susigrąžinti."
         wiki: "Sukurti Wiki"
         unwiki: "Ištrinti Wiki"
         convert_to_moderator: "Pridėk Komandos spalvą"
@@ -3379,6 +3398,7 @@ lt:
       back: "Atgal į kategoriją"
       general: "Bendriniai"
       settings: "Nustatymai"
+      moderation: "Moderavimas"
       tags: "Žymos"
       localization:
         name: "Vardas"
